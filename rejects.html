@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" type="image/png" width="32px" href="public/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png"/>
+        
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d55b79">
+        <meta name="msapplication-TileColor" content="#ee1e1e"/>
+        <meta name="theme-color" content="#ffffff"/>
+        
+        <link rel="stylesheet" href="style2.css" />
+
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no"/>
+        
+        <meta name="title" content="MiladyStation Rejects NFT" />
+        <meta name="keyword" content="Milady, MiladyStation, Ghiblady Maker, Pixelady Maker, Remilia Collective, NFT, Generative Art, AI Art, Anime Art"/>
+        
+        <meta name="description" content="MiladyStation Rejects is a collection of the miladystations too powerful for the original collection."/>
+        
+        <link rel="icon" src="public/favicon32.src" type="image/icon type" />
+
+        <meta property="og:title" content="Rejects NFT" />
+        <meta property="og:description" content="MiladyStation Rejects is a collection of the miladystations too powerful for the original collection."/>
+        
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.miladystation.com/rejects" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="public/media/banner.png"/>
+        <meta name="twitter:title" content="MiladyStation Rejects NFT" />
+        <meta name="twitter:site" content="MiladyStation" />
+        <meta name="twitter:description" content="MiladyStation Rejects is a collection of the miladystations too powerful for the original collection."/>
+        <script>
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+              //alert("Please access this website from a computer.");
+            }
+        </script>
+    </head>
+    <script>
+        // contract
+            // check holder
+            // reject contract
+                // mint
+                    
+
+        // ui
+            // landing wallet connect
+                function connection(){
+                    //web3
+                        //getaccounts
+                        //checkmiladystation
+                        //checkrejects
+                    showSelection();
+                    showAngels(0);
+                }
+            // cart
+                var items = [];
+                function addToCart(num) {
+                    if (items.length < 3) {
+                        items.push(num);
+                    }
+                    let butt = get(`mint${num}`)
+                    butt.disabled = true;
+                }
+                function removeFromCart(num) {
+                    let spot = items.indexOf(num);
+                    items.splice(spot,1);
+                    if (items.length > 0){
+                        clearPop("pop3")
+                        showCart();
+                    } else {
+                        clearPop("pop3");
+                        showSelection();
+                    }
+
+                }
+                function showCart() {
+                        var pop = get("pop3");
+                        console.log(items)
+                        hide("selection");
+                        pop.innerHTML = 
+                        `
+                        <div class="x" onclick="clearPop('pop3'); showSelection()">x</div>
+                        `
+                        pop.innerHTML +=
+                        `
+                        <h2>Your Chosen Angel Alliance</h2>
+                        <div class="cart-items point">
+                        `
+                        
+                        for (let i = 0; i < items.length; i++){
+                            pop.innerHTML +=
+                            `
+                            <img class="cart-item" src="public/angels/${items[i]}.png"/>
+                            <div class="cart-desc">
+                                <h2 class="point" onclick="lookCloseCart(${i})">Angel ${items[i]}</h2>
+                            </div>
+                            
+                            `
+                        }
+                        pop.innerHTML +=
+                        `
+                        </div>
+                        <button class="mint-button">Lock in</button>
+                        `
+                        show("pop3")
+                }
+
+            // grid view
+                function showAngels(page) {
+                    console.log(page);
+                    let grid = get("angels");
+                    grid.innerHTML = 
+                        `
+                            <div class="angel-grid">        
+                        `
+                    let x = page*12;
+                    let y;
+
+                    if (page == 6) {
+                        y = x + 11
+                    } else {
+                        y = x + 12;
+                    }
+                    for (let i = x; i < y; i++){
+                        grid.innerHTML += `<div class="grid-item"><img src="public/angels/${i}.png" class="angel-img point" onclick="lookClose(${i})" /></div>`
+                    }
+                    grid.innerHTML += '</div>'
+                    setPage(page);
+                }
+                function setPage(cur) {
+                    let butts = get("pages");
+                    if (cur == 0){
+                        butts.innerHTML  = 
+                        `
+                        <button disabled><</button>
+                        <button class-"point" onclick="pageTurn(${cur},1)">></button>
+                        `
+                    } else if (cur == 6) {
+                        butts.innerHTML  = 
+                        `
+                        <button class="point" onclick="pageTurn(${cur},-1)"><</button>
+                        <button class="point" disabled>></button>
+                        `
+                    } else {
+                        butts.innerHTML  = 
+                        `
+                        <button class="point" onclick="pageTurn(${cur},-1)"><</button>
+                        <button class="point" onclick="pageTurn(${cur},1)">></button>
+                        `
+                    }
+           
+                }
+                function pageTurn(cur,dir) {
+                    let grid = get("angels");
+                    grid.innerHTML = "";
+                    if (dir > 0) {
+                        showAngels(cur+1);
+                    }
+                    if (dir < 0) {
+                        showAngels(cur-1);
+                    }
+                }
+                function showProtects() {
+                    let prot = get("protected");
+                    prot.innerHTML += 
+                    `
+                    <div>
+                    
+                    </div>
+                    `
+                    show("protected")
+                }
+        // misc
+            // get
+                function get(id) {
+                    return document.getElementById(id);
+                }
+                function itemPlus(num){
+                        if (items.length < 3) {
+                        return `<button id="mint${num}" class="mint-button point" onclick="addToCart(${num})">!Pray</button>`    
+                        } else {
+                        return `<button disabled id="mint${num}" class="mint-button point" >...</button>`    
+                        }
+                        
+                    }
+                // popup
+                //closer look
+                    function lookClose(num) {
+                        var pop = get("pop1");
+                        hide("selection");
+                        console.log(pop)
+                        let action = itemPlus(num);
+                        pop.innerHTML = 
+                        `
+                        <div class="x" onclick="clearPop('pop1'); showSelection()">x</div>
+                        `
+                        pop.innerHTML +=
+                            `<img src="public/angels/${num}.png"/>
+                            <h2 class="desc">Angel ${num}</h2>
+                            ${action}
+                            <button id="nav-left" class="point" onclick="navPop(${num},-1)""><</button>
+                            <button id="nav-right" class="point" onclick="navPop(${num},1)">></button>
+                            `
+                        show("pop1")
+                    }
+                    function lookCloseCart(i) {
+                        var pop = get("pop1");
+                        hide("selection");
+                        hide("pop3");
+                        pop.innerHTML = 
+                        `
+                        <div class="x" onclick="hide('pop1'); clearPop('pop1'); show('pop3')">x</div>
+                        `
+                        pop.innerHTML +=
+                            `
+                            <img src="public/angels/${items[i]}.png"/>
+                            <h2 class="desc">Angel ${items[i]}</h2>
+                            <button class="special-button" onclick="clearPop('pop1'); hide('pop1'); removeFromCart(${items[i]});">Remove from Alliance</button>
+                            `
+                        if (i == 0 && i == items.length-1) {
+                            pop.innerHTML +=    
+                            `
+                            <button id="nav-left" disabled><</button>
+                            <button id="nav-right" disabled>></button>
+                            `
+                        } else if (i == items.length-1) {
+                            pop.innerHTML +=    
+                            `
+                            <button id="nav-left" class="point" onclick="navCart(${i},-1)"><</button>
+                            <button id="nav-right" disabled>></button>
+                            `
+                        } else if (i == 0) {
+                            pop.innerHTML +=    
+                            `
+                            <button id="nav-left" disabled><</button>
+                            <button id="nav-right" class="point" onclick="navCart(${i},1)">></button>
+                            `
+                        
+                        } else {
+                            pop.innerHTML +=    
+                            `
+                            <button id="nav-left" class="point" onclick="navCart(${i},-1)"><</button>
+                            <button id="nav-right" class="point" onclick="navCart(${i},1)">></button>
+                            `
+                        }
+
+                        show("pop1")
+                    }
+                    function clearPop(id) {
+                        console.log('clear')
+                        var pop = get(id);
+                        pop.innerHTML =
+                        ``
+                        hide(id);
+                    }
+                    function navPop(cur, dir) {
+                        console.log(cur);
+                        clearPop("pop1");
+                        if(dir > 0){
+                            console.log('next')
+                            lookClose(cur+1);
+                        } else {
+                            lookClose(cur-1);
+                        }
+                    }
+                    function navCart(cur, dir) {
+                        console.log(cur);
+                        clearPop("pop1");
+                        if(cur == 0){
+
+                        } else if (cur == 2) {
+
+                        } else {
+
+                        }
+                        if(dir > 0){
+                            console.log('next')
+                            lookCloseCart(cur+1);
+                        } else {
+                            lookCloseCart(cur-1);
+                        }
+                    }
+                    // switch view
+                function showSelection() {
+                    hide("landing");
+                    hide("info");
+                    hide("cart-button");
+                    show("selection");
+                    console.log(items.length)
+                    if (items.length > 0) {
+                        show("cart-button");
+                    }
+                }
+                function showInfo() {
+                    hide("selection");
+                    show("info");
+                }
+                function hide(id) {
+                    var target = get(id);
+                    target.style.display = "none";
+                }
+                function show(id) {
+                    var target = get(id);
+                    target.style.display = "block";
+                }
+    </script>
+    <body>
+        <div id="master">
+            <div id="boot">
+                <div id="logo">
+                    <img src="public/bwlogosmol.png" alt="miladystation">
+                </div>
+            </div>
+            <div id="home">
+                <a class="point" href="https://miladystation.net"><img src="public/wlogo.png" /></a>
+            </div>
+            <div id="pop1" class="pop" >
+            </div>
+            <div id="pop2" class="pop" >
+            </div>
+            <div id="pop3" class="pop" >
+            </div>
+            <div id="landing" class="main">
+                <h1>Welcome</h1>
+                <button id="connect" onclick="connection()">Connect Wallet</button>
+            </div>
+            <div id="protected" class="main">
+                <h1>You are under protection</h1>
+            </div>
+            <div id="selection" class="main">
+                <h1>Choose your Angels</h1>
+                <h3 class="point" onclick="showInfo()">(info)</h3>
+                <div id="cart-button" class="x" onclick="showCart()"> !wallet! Alliance</div>
+                <div id="angels"></div>
+                <div id="pages"></div>
+            </div>
+            <div id="info" class="tert">
+                <h1>About</h1>
+                <h3 class="point" onclick="showSelection()">Back to Selection</h3>
+                <p>
+                    Welcome to the Rejects collection, where you'll find some of the most powerful and unique NFTs on Ethereum. These player characters were originally rejected from our flagship collection, MiladyStation, due to their extraordinary abilities and otherworldly qualities. But now, we're releasing them into the world for free, exclusively for our holders.
+                </p>
+                <p>
+                    The Rejects collection is built on the ERC1155 standard, which means that each NFT is a unique and indivisible asset that can be owned and traded on the Ethereum blockchain. We've also designed the minting process to be a "mint your own" experience, which means that you'll be able to create your own NFTs with custom metadata and properties. This gives you full control over your collection and allows you to express your creativity in unique ways.
+                </p>
+                <p>
+                    However, we must warn you that owning a Reject is not for the faint of heart. These fallen angels are powerful and mysterious, and they require a certain level of responsibility and ownership from their owners. You'll need to take care of them, protect them, and make sure they're used for good purposes. But if you're up for the challenge, the Rejects collection is waiting for you.
+                </p>
+            </div>
+            <div id="flame"></div>
+        </div>
+    </body>
+    <script>
+
+  
+                        //animation
+                        function welcome() {
+                            console.log('welcome')
+                            console.dir(document.getElementById('boot'))
+                            
+                            show("boot");
+                            var image = get("logo");
+                            console.log(image)
+                            var opacity = 0;
+                            var intervalID = setInterval(function() {
+                                if (opacity < 1) {
+                                opacity += 0.01;
+                                image.style.opacity = opacity;
+                                } else {
+                                clearInterval(intervalID);
+                                setTimeout(function() {
+                                    var intervalID2 = setInterval(function() {
+                                    if (opacity > 0) {
+                                        opacity -= 0.01;
+                                        image.style.opacity = opacity;
+                                    } else {
+                                        clearInterval(intervalID2);
+                                        hide("boot");
+                                        show("landing");
+                                        show("flame");
+                                    }
+                                    }, 4);
+                                }, 1000);
+                                }
+                            }, 2);
+                            console.log('shows over')
+                            //hide("boot");
+                            //show("landing");
+                            //show("flame");
+                    }
+                    welcome();
+    </script>
+</html>

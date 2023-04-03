@@ -1,0 +1,211 @@
+body {
+    background-image: url('public/stars.gif')
+}
+#master {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+}
+#boot {
+    /* background-image: linear-gradient(to bottom, pink, yellow); */
+    background-color: white;
+    height: 101%;
+    width: 101%;
+    left: -0.5%;
+    top: -0.5%;
+}
+#home {
+    position: absolute;
+    top: 5%;
+    left: 3%;
+}
+#home a img{
+    height: 50px;
+    outline-color: white;
+    outline-width: 3px;
+}
+#logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    opacity: 0;
+}
+#landing {
+    display: none;
+}
+#pop1 {
+    display: none;
+    position: absolute;
+    top: 2%;
+    height: 80%;
+    width: 80%;
+    background-color: black;
+    color: white;
+    z-index: 1;
+    margin: 40px;
+}
+#pop1 img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#nav-left{
+    position: absolute;
+    top: 55%;
+    left: 10%;
+    z-index: 3;
+}
+#nav-right{
+    position: absolute;
+    right: 10%;
+    top: 55%;
+}
+#pop2 {
+    display: none;
+}
+#pop3 {
+    display: none;
+    background-image: url("public/clouds.gif");
+    outline: 4px;
+    outline-color: white;
+}
+#pop3 h2 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+#pop3 img {
+    width: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#cart-button {
+    display: none;
+    width: 33%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#protected {
+    display: none;
+    background-image: url("public/clouds.gif");
+    outline: 4px;
+    outline-color: white;
+}
+.cart-items {
+    width: 100%;
+}
+.cart-items img {
+    width: 20%; 
+}
+.cart-items .cart-desc {
+    background-color: black;
+    background-blend-mode: screen;
+
+}
+.cart-desc {
+    justify-content: center;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.desc {
+    text-align: center;
+}
+.cart {
+    width: 700px;
+}
+.cart img {
+    width: 512px;
+}
+.main {
+    position: relative;
+    top: 10%;
+    display: block;
+    text-align: center;
+}
+.tert {
+    position: relative;
+    top: 10%;
+    display: block;
+    text-align: center;
+    width: 70vh;
+}
+#selection {
+    display: none;
+    margin-bottom: 30%;
+}
+#angels {
+    display: flex;
+    width: 80vh;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.x {
+    outline: 12px;
+    outline-color: azure;
+    outline-style: double;
+    width: 30px;
+    height: 30px;
+    margin: 25px;
+    padding-bottom: 5px;
+    font-size: 30px;
+    text-align: center;
+}
+.x:hover {
+    cursor:pointer;
+}
+.point:hover{
+    cursor: pointer;
+}
+.angel-grid {
+    display: flex;
+    width: 80vh;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.grid-item{
+    flex-basis: calc(33.33% - 10px);
+    margin-bottom: 10px;
+}
+.angel-img {
+    width: 102px;
+}
+#info {
+    display: none;
+}
+button {
+    height: 5%;
+}
+.mint-button {
+    height: 30px;
+    width: 100px;
+    background-image:url("public/clouds.gif");
+    margin: 2px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.special-button {
+    background-image:url("public/clouds.gif");
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#flame {
+    display: none;
+    background-image: url("public/flames.gif");
+    height: 50px;
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+}
