@@ -1075,7 +1075,7 @@
                 console.log('byteRoot',byteRoot);
                 
                 try {
-                    const encodedKey = web3.eth.abi.encodeParameter('bytes32', byteRoot);
+                    const encodedKey = byteRoot;
                 } catch (err) {
                     console.log('key make err:',err) 
                 } 
