@@ -1071,9 +1071,11 @@
                 
                 console.log('proof',proof);
 
+                var byteRoot = web3.utils.fromAscii(root);
+                console.log('byteRoot',byteRoot);
                 
                 try {
-                    const encodedKey = web3.eth.abi.encodeParameter('bytes32', root);
+                    const encodedKey = web3.eth.abi.encodeParameter('bytes32', byteRoot);
                 } catch (err) {
                     console.log('key make err:',err) 
                 } 
