@@ -689,7 +689,6 @@
                 }
                 function showCart() {
                         var pop = get("pop3");
-                        console.log(items)
                         hide("selection");
                         pop.innerHTML = 
                         `
@@ -802,7 +801,6 @@
                     function lookClose(num) {
                         var pop = get("pop1");
                         hide("selection");
-                        console.log(pop)
                         let action = itemPlus(num);
                         pop.innerHTML = 
                         `
@@ -1060,15 +1058,39 @@
             }
             mintSingleFreeMerkle = async(id,amt) => {
                 console.log('here we go, we merkle minting. root:',root);
-                var proof = tree.getProof(CryptoJS.SHA3(accounts[0]));
+                console.log('accounts',accounts[0]);
+                console.log('tree',tree);
+
+                try {
+                    var proof = tree.getProof(CryptoJS.SHA3(accounts[0]));
+                } catch (err) {
+                    console.log('proof make err:',err)
+                }
+                
+
 
                 console.log('proof',proof);
 
                 const encodedKey = web3.eth.abi.encodeParameter('bytes32', root);
+                try {
+
+                } catch (err) {
+                    console.log(' make err:',err) 
+                } 
                 console.log('encoded key:',encodedKey);
-                const encodedProof = web3.eth.abi.encodeParameter('bytes32[]', proof);
+                
+                try {
+                    const encodedProof = web3.eth.abi.encodeParameter('bytes32[]', proof);
+                } catch (err) {
+                    console.log(' make err:',err) 
+                } 
                 console.log('encodedProof',encodedProof);
-                const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [encodedKey, encodedProof]);
+                
+                try {
+                    const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [encodedKey, encodedProof]);
+                } catch (err) {
+                    console.log(' make err:',err) 
+                } 
                 console.log('auth',encodedTuple)
 
                 try {
