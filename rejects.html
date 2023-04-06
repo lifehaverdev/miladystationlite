@@ -41,8 +41,8 @@
         <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
         <script>
             console.log(Web3.givenProvider);
-            const provider = new Web3.providers.HttpProvider('https://sepolia.network');
-            const web3 = new Web3(provider); 
+            //const provider = new Web3.providers.HttpProvider('https://sepolia.network');
+            const web3 = new Web3(Web3.givenProvider); 
             console.log(web3)
             var accounts = [];
             var friend;
