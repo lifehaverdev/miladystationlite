@@ -40,11 +40,11 @@
         <!-- web3 -->
         <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
         <script>
-            console.log('givenProvider:',Web3.givenProvider);
+            //console.log('givenProvider:',Web3.givenProvider);
             
-            const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://sepolia.infura.io/ws/v3/3d54d62605b14e1c94fca9debcdee0fc');
+            //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://sepolia.infura.io/ws/v3/3d54d62605b14e1c94fca9debcdee0fc');
 
-            const web3 = new Web3(provider);
+            const web3 = new Web3(Web3.givenProvider || 'wss://sepolia.infura.io/ws/v3/3d54d62605b14e1c94fca9debcdee0fc');
             console.log('web3 object',web3)
 
 
@@ -652,6 +652,8 @@
                 } catch(err) {
                     console.log('connected',connected);
                     console.log(err.message);
+                    showSelection();
+                    showAngels(0);
                 }   
                 if(connected){
                     var connectbutt = document.getElementById('connect-button');
