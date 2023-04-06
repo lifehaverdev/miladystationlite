@@ -865,7 +865,6 @@
                         hide(id);
                     }
                     function navPop(cur, dir) {
-                        console.log(cur);
                         clearPop("pop1");
                         if(dir > 0){
                             console.log('next')
@@ -875,7 +874,6 @@
                         }
                     }
                     function navCart(cur, dir) {
-                        console.log(cur);
                         clearPop("pop1");
                         if(cur == 0){
 
@@ -885,7 +883,6 @@
 
                         }
                         if(dir > 0){
-                            console.log('next')
                             lookCloseCart(cur+1);
                         } else {
                             lookCloseCart(cur-1);
@@ -897,7 +894,6 @@
                     hide("info");
                     hide("cart-button");
                     show("selection");
-                    console.log(items.length)
                     if (items.length > 0) {
                         show("cart-button");
                     }
@@ -1074,12 +1070,12 @@
                 var byteRoot = web3.utils.fromAscii(root);
                 console.log('byteRoot',byteRoot);
                 
-                try {
-                    const encodedKey = byteRoot;
-                } catch (err) {
-                    console.log('key make err:',err) 
-                } 
-                console.log('encoded key:',encodedKey);
+                // try {
+                //     const encodedKey = byteRoot;
+                // } catch (err) {
+                //     console.log('key make err:',err) 
+                // } 
+                // console.log('encoded key:',encodedKey);
                 
                 try {
                     const encodedProof = web3.eth.abi.encodeParameter('bytes32[]', proof);
@@ -1089,7 +1085,7 @@
                 console.log('encodedProof',encodedProof);
                 
                 try {
-                    const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [encodedKey, encodedProof]);
+                    const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [byteRoot, encodedProof]);
                 } catch (err) {
                     console.log(' make err:',err) 
                 } 
