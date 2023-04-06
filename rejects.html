@@ -45,12 +45,12 @@
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://sepolia.infura.io/ws/v3/3d54d62605b14e1c94fca9debcdee0fc');
 
             const web3 = new Web3(Web3.givenProvider || 'wss://sepolia.infura.io/ws/v3/3d54d62605b14e1c94fca9debcdee0fc');
-            console.log('web3 object',web3)
+            //console.log('web3 object',web3)
 
 
-            web3.eth.getBlockNumber().then((result) => {
-             console.log("Latest Ethereum Block is ",result);
-            });
+            // web3.eth.getBlockNumber().then((result) => {
+            //  console.log("Latest Ethereum Block is ",result);
+            // });
             
             var accounts = [];
             var friend;
@@ -721,7 +721,7 @@
 
             // grid view
                 function showAngels(page) {
-                    console.log('page',page);
+                    
                     let grid = get("angels");
                     grid.innerHTML = 
                         `
@@ -1004,22 +1004,23 @@
             const tree = new MerkleTree(leaves, CryptoJS.SHA3);
             //console.log('tree',tree)
             const root = tree.getRoot().toString('hex');
-            console.log(root);
+            //console.log(root);
             //const leaf = CryptoJS.SHA3('0x855882cc65ba66cdbc7a8c512143f10169891307');
             //const proof = tree.getProof(leaf);
             //console.log(proof);
-            console.log('big if true',tree.verify(proof, leaf, root));
+            //console.log('big if true',tree.verify(proof, leaf, root));
         </script>
     <!-- web3 pII -->
     <script>
             connectWallet = async() => {
-                console.log('you clicked connect')
+                //console.log('you clicked connect')
                 let connected = false;
                 try {
                     accounts = await web3.eth.requestAccounts().then()
                     connected = true;
-                } catch(err) {
                     console.log('connected',connected);
+                } catch(err) {
+                    console.log('not connected');
                     console.log(err.message);
                     showSelection();
                     showAngels(0);
@@ -1058,14 +1059,16 @@
                 }
             }
             mintSingleFreeMerkle = async(id,amt) => {
-                
+                console.log('here we go, we merkle minting. root:',root);
                 var proof = tree.getProof(CryptoJS.SHA3(accounts[0]));
-                console.log(proof);
+
+                console.log('proof',proof);
 
                 const encodedKey = web3.eth.abi.encodeParameter('bytes32', root);
+                console.log('encoded key:',encodedKey);
                 const encodedProof = web3.eth.abi.encodeParameter('bytes32[]', proof);
+                console.log('encodedProof',encodedProof);
                 const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [encodedKey, encodedProof]);
-
                 console.log('auth',encodedTuple)
 
                 try {
