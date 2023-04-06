@@ -643,7 +643,7 @@
 
             const rejects = new web3.eth.Contract(rejectABI,rejectAddress);
 
-            
+            console.log('this new 3:50')
         </script>
     </head>
 
@@ -1059,36 +1059,17 @@
                 var accountHash = CryptoJS.SHA3(accounts[0]);
                 console.log('accountHash',accountHash);
 
-                try {
-                    var proof = tree.getProof(accountHash);
-                } catch (err) {
-                    console.log('proof make err:',err)
-                }
-                
+                var proof = tree.getProof(accountHash);
                 console.log('proof',proof);
 
                 var byteRoot = web3.utils.fromAscii(root);
                 console.log('byteRoot',byteRoot);
                 
-                // try {
-                //     const encodedKey = byteRoot;
-                // } catch (err) {
-                //     console.log('key make err:',err) 
-                // } 
-                // console.log('encoded key:',encodedKey);
-                
-                try {
-                    const encodedProof = web3.eth.abi.encodeParameter('bytes32[]', proof);
-                } catch (err) {
-                    console.log('proof make err:',err) 
-                } 
+                const encodedProof = web3.eth.abi.encodeParameter('bytes32[]', proof);
                 console.log('encodedProof',encodedProof);
                 
-                try {
-                    const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [byteRoot, encodedProof]);
-                } catch (err) {
-                    console.log(' make err:',err) 
-                } 
+                
+                const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [byteRoot, encodedProof]); 
                 console.log('auth',encodedTuple)
 
                 try {
