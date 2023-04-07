@@ -1848,6 +1848,7 @@
                 }
             // cart
                 var items = [];
+                var amounts = [];
                 function addToCart(num) {
                     if (items.length < 3) {
                         items.push(num);
@@ -1897,7 +1898,7 @@
                             <button class="mint-button" onclick="mintSingleFreeMerkle(${items[0]},1)">Lock in</button>
                             `
                         } else if (items.length > 1 && items.length <= 3) {
-                            let amounts = new Array(items.length);
+                            amounts = new Array(items.length);
                             for (let i = 0; i < amounts.length; i++) {
                                 amounts[i] = 1;
                             }
