@@ -1079,9 +1079,9 @@
 
                 const encodedRoot = hexRoot;
                 const encodedProof = proof.map((p) => web3.utils.bytesToHex(p.data));
-                console.log(encodedRoot);
-                console.log(encodedProof);
-                const encodedTuple = web3.eth.abi.encodeParameter(['bytes32', 'bytes32[]'], [encodedRoot, encodedProof]);
+                console.log('root',encodedRoot);
+                console.log('proof',encodedProof);
+                const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [encodedRoot, encodedProof]);
                 console.log('auth',encodedTuple)
 
                 try {
