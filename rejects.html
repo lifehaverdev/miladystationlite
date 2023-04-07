@@ -1055,7 +1055,7 @@
                 }
             }
             mintSingleFreeMerkle = async(id,amt) => {
-                console.log('here we go, we merkle minting. root:',root);
+                console.log('here we go, we merkle minting. root:',hexRoot);
                 console.log('accounts',accounts[0]);
                 console.log('tree',tree);
                 var accountHash = CryptoJS.SHA256(accounts[0]);
@@ -1071,7 +1071,7 @@
                 // console.log('encodedProof',encodedProof);
                 
                 
-                const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [root, proof]); 
+                const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [hexRoot, proof]); 
                 console.log('auth',encodedTuple)
 
                 try {
