@@ -643,7 +643,7 @@
 
             const rejects = new web3.eth.Contract(rejectABI,rejectAddress);
 
-            console.log('this new 8:25 trying 256 nonhexroot')
+            console.log('this new 8:32 trying 256 chat hash')
             //got the proof to work
         </script>
     </head>
@@ -1072,7 +1072,12 @@
                 // console.log('encodedProof',encodedProof);
                 
                 
-                const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [root, proof]); 
+                //const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [root, proof]); 
+                //console.log('auth',encodedTuple)
+
+                const encodedRoot = '0x' + Buffer.from(root).toString('hex');
+                const encodedProof = proof.map((p) => '0x' + Buffer.from(p).toString('hex'));
+                const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [encodedRoot, encodedProof]);
                 console.log('auth',encodedTuple)
 
                 try {
