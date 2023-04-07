@@ -2276,7 +2276,7 @@
                 var accountHash = web3.utils.sha3(accounts[0]);
                 var proof = tree.getProof(accountHash);
                 const encodedProof = proof.map((p) => p.data);
-                console.log('hexkey',web3.utils.abi.bytesToHex(root));
+                console.log('hexkey',web3.utils.bytesToHex(root));
                 console.log('proof',proof);
                 console.log('encodedproof',encodedProof);
                 console.log('ids',ids);
