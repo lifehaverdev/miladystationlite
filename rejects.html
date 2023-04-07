@@ -1824,7 +1824,7 @@
 
             const rejects = new web3.eth.Contract(rejectABI,rejectAddress);
 
-            console.log('this new 4/7 1:41 multimerkle ')
+            console.log('this new 4/7 6:26 multimerkle troubleshoot')
             //got the proof to work
         </script>
     </head>
@@ -2277,6 +2277,8 @@
                 var proof = tree.getProof(accountHash);
                 const encodedProof = proof.map((p) => p.data);
                 console.log('hexkey',web3.utils.bytesToHex(root));
+                console.log('proofp1',web3.utils.bytesToHex(encodedProof[0]));
+                console.log('proofp2',web3.utils.bytesToHex(encodedProof[1]));
                 console.log('proof',proof);
                 console.log('encodedproof',encodedProof);
                 console.log('ids',ids);
