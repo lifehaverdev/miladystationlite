@@ -2255,13 +2255,13 @@
 
                 try {
                     await rejects.methods
-                                        .freeMintMerkleSingle(root,encodedProof,id,amt)
+                                        .freeMintMerkleSingle(root,encodedProof,id)
                                         .send({
                                             from: accounts[0],
                                             value: 0
                                         })
                                         .on('transactionHash', function(hash){
-                                            console.log('mint',amt,hash)
+                                            console.log('mint',id,hash)
                                         });
 
                     items = [];
