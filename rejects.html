@@ -1906,7 +1906,7 @@
                             pop.innerHTML +=
                             `
                             </div>
-                            <button class="mint-button" onclick="mintBatchFreeMerkle(${items},${amounts})">Lock in</button>
+                            <button class="mint-button" onclick="mintBatchFreeMerkle(items,amounts)">Lock in</button>
                             `
                         }
   
@@ -2062,7 +2062,6 @@
                     function navPop(cur, dir) {
                         clearPop("pop1");
                         if(dir > 0){
-                            console.log('next')
                             lookClose(cur+1);
                         } else {
                             lookClose(cur-1);
@@ -2288,7 +2287,7 @@
                                             value: 0
                                         })
                                         .on('transactionHash', function(hash){
-                                            console.log('mint',amts,hash)
+                                            console.log('mint',ids,hash)
                                         });
 
                     items = [];
