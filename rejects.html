@@ -2237,21 +2237,6 @@
                 }
             }
 
-            // mintSingleFreeIERC = async(id,amt) => {
-            //     try {
-            //         await rejects.methods
-            //                             .freeMintIERCSingle(id,amt)
-            //                             .send({
-            //                                 from: accounts[0],
-            //                                 value: 0
-            //                             })
-            //                             .on('transactionHash', function(hash){
-            //                                 console.log('mint',amt,hash)
-            //                             });
-            //     } catch (err) {
-            //         console.log(err.message);
-            //     }
-            // }
             mintSingleFreeMerkle = async(id,amt) => {
                 console.log('here we go, we merkle minting. root:',hexRoot);
                 console.log('accounts',accounts[0]);
@@ -2291,6 +2276,10 @@
                 var accountHash = web3.utils.sha3(accounts[0]);
                 var proof = tree.getProof(accountHash);
                 const encodedProof = proof.map((p) => p.data);
+                console.log(root);
+                console.log(encodedProof);
+                console.log(ids);
+                console.log(amts);
                 try {
                     await rejects.methods
                                         .mintMerkleFreeBatch(root,encodedProof,ids,amts)
