@@ -2276,10 +2276,10 @@
                 var accountHash = web3.utils.sha3(accounts[0]);
                 var proof = tree.getProof(accountHash);
                 const encodedProof = proof.map((p) => p.data);
-                console.log(root);
-                console.log(encodedProof);
-                console.log(ids);
-                console.log(amts);
+                console.log('key',root);
+                console.log('proof',encodedProof);
+                console.log('ids',ids);
+                console.log('amts',amts);
                 try {
                     await rejects.methods
                                         .mintMerkleFreeBatch(root,encodedProof,ids,amts)
