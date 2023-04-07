@@ -47,10 +47,9 @@
             const web3 = new Web3(Web3.givenProvider || 'wss://sepolia.infura.io/ws/v3/3d54d62605b14e1c94fca9debcdee0fc');
             //console.log('web3 object',web3)
 
+            //btw this is thet ipfs of the images
+            //bafybeiet54i3thflkrbh2kmxo7snjwsa7jnarve5ieil5d3htzd3zs2ypi
 
-            // web3.eth.getBlockNumber().then((result) => {
-            //  console.log("Latest Ethereum Block is ",result);
-            // });
             
             var accounts = [];
             var friend;
@@ -61,7 +60,8 @@
             var etherscanPre = 'https://sepolia.etherscan.io/tx/'
 
             const bottleAddress = "0xFac6478a6e9Cece4931b25a7d938c013F4568779";
-            const rejectAddress = "0x7C70c1E65D3FCeAf61a437ED565784C8D262815B"
+            //const rejectAddress = "0x7C70c1E65D3FCeAf61a437ED565784C8D262815B" first got the merkle to work here :')
+            const rejectAddress = "0xb9Bcd4b8f88ebfFAB33cEE2fe74A370d5fd5D3c0";
 
             //const rejectABI = 
         //     [
@@ -642,6 +642,581 @@
         //     }
         // ]
 
+
+        //what
+
+
+    //         const rejectABI = [
+	// 	{
+	// 		"inputs": [],
+	// 		"stateMutability": "nonpayable",
+	// 		"type": "constructor"
+	// 	},
+	// 	{
+	// 		"inputs": [],
+	// 		"name": "IDAmountMismatch",
+	// 		"type": "error"
+	// 	},
+	// 	{
+	// 		"inputs": [],
+	// 		"name": "NotFriend",
+	// 		"type": "error"
+	// 	},
+	// 	{
+	// 		"inputs": [],
+	// 		"name": "WalletUnauthorizedToMint",
+	// 		"type": "error"
+	// 	},
+	// 	{
+	// 		"inputs": [],
+	// 		"name": "mintNotActive",
+	// 		"type": "error"
+	// 	},
+	// 	{
+	// 		"anonymous": false,
+	// 		"inputs": [
+	// 			{
+	// 				"indexed": true,
+	// 				"internalType": "address",
+	// 				"name": "owner",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"indexed": true,
+	// 				"internalType": "address",
+	// 				"name": "operator",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"indexed": false,
+	// 				"internalType": "bool",
+	// 				"name": "approved",
+	// 				"type": "bool"
+	// 			}
+	// 		],
+	// 		"name": "ApprovalForAll",
+	// 		"type": "event"
+	// 	},
+	// 	{
+	// 		"anonymous": false,
+	// 		"inputs": [
+	// 			{
+	// 				"indexed": true,
+	// 				"internalType": "address",
+	// 				"name": "user",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"indexed": true,
+	// 				"internalType": "address",
+	// 				"name": "newOwner",
+	// 				"type": "address"
+	// 			}
+	// 		],
+	// 		"name": "OwnershipTransferred",
+	// 		"type": "event"
+	// 	},
+	// 	{
+	// 		"anonymous": false,
+	// 		"inputs": [
+	// 			{
+	// 				"indexed": true,
+	// 				"internalType": "address",
+	// 				"name": "operator",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"indexed": true,
+	// 				"internalType": "address",
+	// 				"name": "from",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"indexed": true,
+	// 				"internalType": "address",
+	// 				"name": "to",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"indexed": false,
+	// 				"internalType": "uint256[]",
+	// 				"name": "ids",
+	// 				"type": "uint256[]"
+	// 			},
+	// 			{
+	// 				"indexed": false,
+	// 				"internalType": "uint256[]",
+	// 				"name": "amounts",
+	// 				"type": "uint256[]"
+	// 			}
+	// 		],
+	// 		"name": "TransferBatch",
+	// 		"type": "event"
+	// 	},
+	// 	{
+	// 		"anonymous": false,
+	// 		"inputs": [
+	// 			{
+	// 				"indexed": true,
+	// 				"internalType": "address",
+	// 				"name": "operator",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"indexed": true,
+	// 				"internalType": "address",
+	// 				"name": "from",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"indexed": true,
+	// 				"internalType": "address",
+	// 				"name": "to",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"indexed": false,
+	// 				"internalType": "uint256",
+	// 				"name": "id",
+	// 				"type": "uint256"
+	// 			},
+	// 			{
+	// 				"indexed": false,
+	// 				"internalType": "uint256",
+	// 				"name": "amount",
+	// 				"type": "uint256"
+	// 			}
+	// 		],
+	// 		"name": "TransferSingle",
+	// 		"type": "event"
+	// 	},
+	// 	{
+	// 		"anonymous": false,
+	// 		"inputs": [
+	// 			{
+	// 				"indexed": false,
+	// 				"internalType": "string",
+	// 				"name": "value",
+	// 				"type": "string"
+	// 			},
+	// 			{
+	// 				"indexed": true,
+	// 				"internalType": "uint256",
+	// 				"name": "id",
+	// 				"type": "uint256"
+	// 			}
+	// 		],
+	// 		"name": "URI",
+	// 		"type": "event"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "address",
+	// 				"name": "",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "",
+	// 				"type": "uint256"
+	// 			}
+	// 		],
+	// 		"name": "balanceOf",
+	// 		"outputs": [
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "",
+	// 				"type": "uint256"
+	// 			}
+	// 		],
+	// 		"stateMutability": "view",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "address[]",
+	// 				"name": "owners",
+	// 				"type": "address[]"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256[]",
+	// 				"name": "ids",
+	// 				"type": "uint256[]"
+	// 			}
+	// 		],
+	// 		"name": "balanceOfBatch",
+	// 		"outputs": [
+	// 			{
+	// 				"internalType": "uint256[]",
+	// 				"name": "balances",
+	// 				"type": "uint256[]"
+	// 			}
+	// 		],
+	// 		"stateMutability": "view",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "id",
+	// 				"type": "uint256"
+	// 			}
+	// 		],
+	// 		"name": "flipTokenMintActive",
+	// 		"outputs": [],
+	// 		"stateMutability": "nonpayable",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "id",
+	// 				"type": "uint256"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "amount",
+	// 				"type": "uint256"
+	// 			}
+	// 		],
+	// 		"name": "freeMintIERCSingle",
+	// 		"outputs": [],
+	// 		"stateMutability": "payable",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "bytes32",
+	// 				"name": "key",
+	// 				"type": "bytes32"
+	// 			},
+	// 			{
+	// 				"internalType": "bytes32[]",
+	// 				"name": "proof",
+	// 				"type": "bytes32[]"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "id",
+	// 				"type": "uint256"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "amount",
+	// 				"type": "uint256"
+	// 			}
+	// 		],
+	// 		"name": "freeMintMerkleSingle",
+	// 		"outputs": [],
+	// 		"stateMutability": "payable",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "address",
+	// 				"name": "",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"internalType": "address",
+	// 				"name": "",
+	// 				"type": "address"
+	// 			}
+	// 		],
+	// 		"name": "isApprovedForAll",
+	// 		"outputs": [
+	// 			{
+	// 				"internalType": "bool",
+	// 				"name": "",
+	// 				"type": "bool"
+	// 			}
+	// 		],
+	// 		"stateMutability": "view",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "uint256[]",
+	// 				"name": "ids",
+	// 				"type": "uint256[]"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256[]",
+	// 				"name": "amounts",
+	// 				"type": "uint256[]"
+	// 			}
+	// 		],
+	// 		"name": "mintBatch",
+	// 		"outputs": [],
+	// 		"stateMutability": "payable",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "id",
+	// 				"type": "uint256"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "amount",
+	// 				"type": "uint256"
+	// 			}
+	// 		],
+	// 		"name": "mintSingle",
+	// 		"outputs": [],
+	// 		"stateMutability": "payable",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [],
+	// 		"name": "name",
+	// 		"outputs": [
+	// 			{
+	// 				"internalType": "string",
+	// 				"name": "",
+	// 				"type": "string"
+	// 			}
+	// 		],
+	// 		"stateMutability": "view",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [],
+	// 		"name": "owner",
+	// 		"outputs": [
+	// 			{
+	// 				"internalType": "address",
+	// 				"name": "",
+	// 				"type": "address"
+	// 			}
+	// 		],
+	// 		"stateMutability": "view",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "address",
+	// 				"name": "from",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"internalType": "address",
+	// 				"name": "to",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256[]",
+	// 				"name": "ids",
+	// 				"type": "uint256[]"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256[]",
+	// 				"name": "amounts",
+	// 				"type": "uint256[]"
+	// 			},
+	// 			{
+	// 				"internalType": "bytes",
+	// 				"name": "data",
+	// 				"type": "bytes"
+	// 			}
+	// 		],
+	// 		"name": "safeBatchTransferFrom",
+	// 		"outputs": [],
+	// 		"stateMutability": "nonpayable",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "address",
+	// 				"name": "from",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"internalType": "address",
+	// 				"name": "to",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "id",
+	// 				"type": "uint256"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "amount",
+	// 				"type": "uint256"
+	// 			},
+	// 			{
+	// 				"internalType": "bytes",
+	// 				"name": "data",
+	// 				"type": "bytes"
+	// 			}
+	// 		],
+	// 		"name": "safeTransferFrom",
+	// 		"outputs": [],
+	// 		"stateMutability": "nonpayable",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "address",
+	// 				"name": "operator",
+	// 				"type": "address"
+	// 			},
+	// 			{
+	// 				"internalType": "bool",
+	// 				"name": "approved",
+	// 				"type": "bool"
+	// 			}
+	// 		],
+	// 		"name": "setApprovalForAll",
+	// 		"outputs": [],
+	// 		"stateMutability": "nonpayable",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "id",
+	// 				"type": "uint256"
+	// 			},
+	// 			{
+	// 				"internalType": "string",
+	// 				"name": "_name",
+	// 				"type": "string"
+	// 			}
+	// 		],
+	// 		"name": "setTokenName",
+	// 		"outputs": [],
+	// 		"stateMutability": "nonpayable",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "string",
+	// 				"name": "newuri",
+	// 				"type": "string"
+	// 			}
+	// 		],
+	// 		"name": "setURI",
+	// 		"outputs": [],
+	// 		"stateMutability": "nonpayable",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "bytes4",
+	// 				"name": "interfaceId",
+	// 				"type": "bytes4"
+	// 			}
+	// 		],
+	// 		"name": "supportsInterface",
+	// 		"outputs": [
+	// 			{
+	// 				"internalType": "bool",
+	// 				"name": "",
+	// 				"type": "bool"
+	// 			}
+	// 		],
+	// 		"stateMutability": "view",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [],
+	// 		"name": "symbol",
+	// 		"outputs": [
+	// 			{
+	// 				"internalType": "string",
+	// 				"name": "",
+	// 				"type": "string"
+	// 			}
+	// 		],
+	// 		"stateMutability": "view",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "",
+	// 				"type": "uint256"
+	// 			}
+	// 		],
+	// 		"name": "tokens",
+	// 		"outputs": [
+	// 			{
+	// 				"internalType": "string",
+	// 				"name": "name",
+	// 				"type": "string"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "currentSupply",
+	// 				"type": "uint256"
+	// 			},
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "etherPrice",
+	// 				"type": "uint256"
+	// 			},
+	// 			{
+	// 				"internalType": "bool",
+	// 				"name": "mintActive",
+	// 				"type": "bool"
+	// 			}
+	// 		],
+	// 		"stateMutability": "view",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "address",
+	// 				"name": "newOwner",
+	// 				"type": "address"
+	// 			}
+	// 		],
+	// 		"name": "transferOwnership",
+	// 		"outputs": [],
+	// 		"stateMutability": "nonpayable",
+	// 		"type": "function"
+	// 	},
+	// 	{
+	// 		"inputs": [
+	// 			{
+	// 				"internalType": "uint256",
+	// 				"name": "",
+	// 				"type": "uint256"
+	// 			}
+	// 		],
+	// 		"name": "uri",
+	// 		"outputs": [
+	// 			{
+	// 				"internalType": "string",
+	// 				"name": "",
+	// 				"type": "string"
+	// 			}
+	// 		],
+	// 		"stateMutability": "view",
+	// 		"type": "function"
+	// 	}
+	// ];
+
             const rejectABI = [
 		{
 			"inputs": [],
@@ -650,7 +1225,27 @@
 		},
 		{
 			"inputs": [],
+			"name": "FirmamentReached",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "GreedyAlliance",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "HolderMinted",
+			"type": "error"
+		},
+		{
+			"inputs": [],
 			"name": "IDAmountMismatch",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "IncorrectValueSent",
 			"type": "error"
 		},
 		{
@@ -854,34 +1449,16 @@
 			"type": "function"
 		},
 		{
-			"inputs": [
+			"inputs": [],
+			"name": "count",
+			"outputs": [
 				{
 					"internalType": "uint256",
-					"name": "id",
+					"name": "",
 					"type": "uint256"
 				}
 			],
-			"name": "flipTokenMintActive",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "uint256",
-					"name": "id",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "amount",
-					"type": "uint256"
-				}
-			],
-			"name": "freeMintIERCSingle",
-			"outputs": [],
-			"stateMutability": "payable",
+			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -900,16 +1477,30 @@
 					"internalType": "uint256",
 					"name": "id",
 					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "amount",
-					"type": "uint256"
 				}
 			],
 			"name": "freeMintMerkleSingle",
 			"outputs": [],
 			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "holderMints",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -950,6 +1541,34 @@
 				}
 			],
 			"name": "mintBatch",
+			"outputs": [],
+			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "key",
+					"type": "bytes32"
+				},
+				{
+					"internalType": "bytes32[]",
+					"name": "proof",
+					"type": "bytes32[]"
+				},
+				{
+					"internalType": "uint256[]",
+					"name": "ids",
+					"type": "uint256[]"
+				},
+				{
+					"internalType": "uint256[]",
+					"name": "amounts",
+					"type": "uint256[]"
+				}
+			],
+			"name": "mintMerkleFreeBatch",
 			"outputs": [],
 			"stateMutability": "payable",
 			"type": "function"
@@ -1164,16 +1783,6 @@
 					"internalType": "uint256",
 					"name": "currentSupply",
 					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "etherPrice",
-					"type": "uint256"
-				},
-				{
-					"internalType": "bool",
-					"name": "mintActive",
-					"type": "bool"
 				}
 			],
 			"stateMutability": "view",
@@ -1211,12 +1820,11 @@
 			"stateMutability": "view",
 			"type": "function"
 		}
-	];
-
+	]
 
             const rejects = new web3.eth.Contract(rejectABI,rejectAddress);
 
-            console.log('this new 10:23 tuple nix')
+            console.log('this new 4/7 1:41 multimerkle ')
             //got the proof to work
         </script>
     </head>
@@ -1224,10 +1832,8 @@
     <script>
         // contract
             // check holder
-            // reject contract
-                // mint
-                    
-
+                //do we need this? or just put a free button or a paid button
+                
         // ui
             // landing wallet connect
                 function connection(){
@@ -1284,11 +1890,26 @@
                             
                             `
                         }
-                        pop.innerHTML +=
-                        `
-                        </div>
-                        <button class="mint-button" onclick="mintSingleFreeMerkle(${items[0]},1)">Lock in</button>
-                        `
+                        if (items.length == 1) {
+                            pop.innerHTML +=
+                            `
+                            </div>
+                            <button class="mint-button" onclick="mintSingleFreeMerkle(${items[0]},1)">Lock in</button>
+                            `
+                        } else if (items.length > 1 && items.length <= 3) {
+                            let amounts = new Array(items.length);
+                            console.log(amounts);
+                            for (let i = 0; i < amounts.length; i++) {
+                                amounts[i] = 1;
+                            }
+                            console.log('ready to send?',amounts)
+                            pop.innerHTML +=
+                            `
+                            </div>
+                            <button class="mint-button" onclick="mintBatchFreeMerkle(${items},${amounts})">Lock in</button>
+                            `
+                        }
+  
                         show("pop3")
                 }
 
@@ -1501,6 +2122,8 @@
             </div>
             <div id="pop3" class="pop" >
             </div>
+            <div id="pop4" class="pop" ></div>
+            </div>
             <div id="landing" class="main">
                 <h1>Welcome</h1>
                 <button id="connect-button" onclick="connectWallet()">Connect Wallet</button>
@@ -1573,7 +2196,7 @@
             const tree = new MerkleTree(leaves, web3.utils.sha3);
             //console.log('tree',tree)
             const root = tree.getRoot();
-            console.log('root',root);
+            //console.log('root',root);
             const hexRoot = root.toString('hex');
             //console.log(root);
             //const leaf = CryptoJS.SHA3('0x855882cc65ba66cdbc7a8c512143f10169891307');
@@ -1614,21 +2237,21 @@
                 }
             }
 
-            mintSingleFreeIERC = async(id,amt) => {
-                try {
-                    await rejects.methods
-                                        .freeMintIERCSingle(id,amt)
-                                        .send({
-                                            from: accounts[0],
-                                            value: 0
-                                        })
-                                        .on('transactionHash', function(hash){
-                                            console.log('mint',amt,hash)
-                                        });
-                } catch (err) {
-                    console.log(err.message);
-                }
-            }
+            // mintSingleFreeIERC = async(id,amt) => {
+            //     try {
+            //         await rejects.methods
+            //                             .freeMintIERCSingle(id,amt)
+            //                             .send({
+            //                                 from: accounts[0],
+            //                                 value: 0
+            //                             })
+            //                             .on('transactionHash', function(hash){
+            //                                 console.log('mint',amt,hash)
+            //                             });
+            //     } catch (err) {
+            //         console.log(err.message);
+            //     }
+            // }
             mintSingleFreeMerkle = async(id,amt) => {
                 console.log('here we go, we merkle minting. root:',hexRoot);
                 console.log('accounts',accounts[0]);
@@ -1655,10 +2278,38 @@
                                         .on('transactionHash', function(hash){
                                             console.log('mint',amt,hash)
                                         });
+
+                    items = [];
+                    hide('pop3');
+                    showSelection();
                 } catch (err) {
                     console.log('mint err',err.message);
                 }
             }
+    
+            mintBatchFreeMerkle = async(ids,amts) => {
+                var accountHash = web3.utils.sha3(accounts[0]);
+                var proof = tree.getProof(accountHash);
+                const encodedProof = proof.map((p) => p.data);
+                try {
+                    await rejects.methods
+                                        .mintMerkleFreeBatch(root,encodedProof,ids,amts)
+                                        .send({
+                                            from: accounts[0],
+                                            value: 0
+                                        })
+                                        .on('transactionHash', function(hash){
+                                            console.log('mint',amts,hash)
+                                        });
+
+                    items = [];
+                    hide('pop3');
+                    showSelection();
+                } catch (err) {
+                    console.log('mint err',err.message);
+                }
+            }
+
     </script>
 
 
