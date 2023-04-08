@@ -496,14 +496,14 @@
                 console.log('proof',proof);
 
                 
-                const encodedProof = proof.map((p) => p.data);
+                //const encodedProof = proof.map((p) => p.data);
                 console.log('proof',encodedProof);
                 //const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [root, encodedProof]);
                 //console.log('auth',encodedTuple)
 
                 try {
                     await rejects.methods
-                                        .freeMintMerkleSingle(root,encodedProof,id)
+                                        .freeMintMerkleSingle(root,proof,id)
                                         .send({
                                             from: accounts[0],
                                             value: 0
