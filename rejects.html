@@ -437,7 +437,7 @@
             //const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4','0x8703a1aC3a2474eE68A1154B7538172f9865192c','0xE51B692Ee9671E7EA69022D1C70bdCF16fff07c5'].map( x => CryptoJS.SHA256(x))
             const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4','0x8703a1aC3a2474eE68A1154B7538172f9865192c','0xE51B692Ee9671E7EA69022D1C70bdCF16fff07c5'].map( x => web3.utils.sha3(x))
             //console.log(leaves);
-            const tree = new MerkleTree(leaves, web3.utils.sha3);
+            const tree = new MerkleTree(leaves, keccak256, { sortPairs: true });
             //console.log('tree',tree)
             const root = tree.getRoot();
             //console.log('root',root);
