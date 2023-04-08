@@ -439,7 +439,7 @@
             //console.log(leaves);
             const tree = new MerkleTree(leaves, keccak256, { sortPairs: true });
             //console.log('tree',tree)
-            const root = tree.getRoot();
+            const root = tree.getHexRoot();
             //console.log('root',root);
             const hexRoot = root.toString('hex');
             //console.log(root);
@@ -486,14 +486,13 @@
             }
 
             mintSingleFreeMerkle = async(id,amt) => {
-                console.log('here we go, we merkle minting. root:',hexRoot);
+                console.log('here we go, we merkle minting. root:',root);
                 console.log('accounts',accounts[0]);
                 console.log('tree',tree);
                 var accountHash = web3.utils.sha3(accounts[0]);
                 console.log('accountHash',accountHash);
 
                 var proof = tree.getHexProof(accountHash);
-                console.log('proof',proof);
 
                 
                 //const encodedProof = proof.map((p) => p.data);
