@@ -230,7 +230,7 @@
                 }
                 function itemPlus(num){
                         if (items.length < 3) {
-                        return `<button id="mint${num}" class="mint-button point" onclick="addToCart(${num})">!Pray</button>`    
+                        return `<button id="mint${num}" class="mint-button point" onclick="addToCart(${num}); hide('pop1'); showSelection()">!Pray</button>`    
                         } else {
                         return `<button disabled id="mint${num}" class="mint-button point" >...</button>`    
                         }
@@ -497,7 +497,7 @@
 
                 
                 //const encodedProof = proof.map((p) => p.data);
-                console.log('proof',encodedProof);
+                console.log('proof',proof);
                 //const encodedTuple = web3.eth.abi.encodeParameters(['bytes32', 'bytes32[]'], [root, encodedProof]);
                 //console.log('auth',encodedTuple)
 
