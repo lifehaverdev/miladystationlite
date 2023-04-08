@@ -370,7 +370,7 @@
             </div>
             <div id="landing" class="main">
                 <h1>Welcome</h1>
-                <button id="connect-button" onclick="connectWallet()">Connect Wallet</button>
+                <button id="connect-button" onclick="connectWallet()">Connect Wallet (or don't if youre just looking)</button>
             </div>
             <div id="protected" class="main">
                 <h1>You are under protection</h1>
@@ -478,6 +478,10 @@
                     showSelection();
                     showAngels(0);
                     //checkWallet();
+                } else {
+                    showSelection();
+                    showAngels(0);
+                    console.log('yure not connected fam');
                 }
             }
 
@@ -488,7 +492,7 @@
                 var accountHash = web3.utils.sha3(accounts[0]);
                 console.log('accountHash',accountHash);
 
-                var proof = tree.getProof(accountHash);
+                var proof = tree.getHexProof(accountHash);
                 console.log('proof',proof);
 
                 
