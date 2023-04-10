@@ -492,7 +492,7 @@
                 
                 try {
                     await rejects.methods
-                                        .freeMintMerkleSingle(root,proof,id)
+                                        .freeMintMerkleSingle(proof,root,id)
                                         .send({
                                             from: accounts[0],
                                             value: 0
