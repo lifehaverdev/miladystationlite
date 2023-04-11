@@ -197,7 +197,17 @@
                     let screen = window.screen.width;
                     console.log(screen);
                     if (screen < 650){
-                        console.log('AHHH WHAT DO I DO')
+                        console.log('AHHH WHAT DO I DO');
+                        let x = page*8;
+                        let y;
+                        if (page == 10){
+                            y = x + 2;
+                        } else {
+                            y = x + 8;
+                        }
+                        for (let i = x; i <y; i++){
+                            grid.innerHTML += `<div class="grid-item"><img src="public/angels/${i}.png" class="angel-img point" onclick="lookClose(${i})" /></div>`
+                        }
                     } else {
                         let x = page*12;
                         let y;
