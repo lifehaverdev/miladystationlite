@@ -153,23 +153,24 @@
                             `
                         }
                         pop.innerHTML += '</div>'
-                        if (items.length == 1) {
-                            pop.innerHTML +=
-                            `
-                            <button class="mint-button" onclick="mintSingleFreeMerkle(${items[0]},1)">Lock in</button>
-                            `
-                        } else if (items.length > 1 && items.length <= 3) {
-                            amounts = new Array(items.length);
-                            for (let i = 0; i < amounts.length; i++) {
-                                amounts[i] = 1;
-                            }
-                            console.log('ready to send?',amounts);
-                            console.log('items',items);
-                            pop.innerHTML +=
-                            `
-                            <button class="mint-button" onclick="mintBatchFreeMerkle(items,amounts)">Lock in</button>
-                            `
-                        }
+                        // if (items.length == 1) {
+                        //     pop.innerHTML +=
+                        //     `
+                        //     <button class="mint-button" onclick="mintSingleFreeMerkle(${items[0]},1)">Lock in</button>
+                        //     `
+                        // } else if (items.length > 1 && items.length <= 3) {
+                        //     amounts = new Array(items.length);
+                        //     for (let i = 0; i < amounts.length; i++) {
+                        //         amounts[i] = 1;
+                        //     }
+                        //     console.log('ready to send?',amounts);
+                        //     console.log('items',items);
+                        //     pop.innerHTML +=
+                        //     `
+                        //     <button class="mint-button" onclick="mintBatchFreeMerkle(items,amounts)">Lock in</button>
+                        //     `
+                        // }
+                        pop.innerHTML += cartFlow(items);
   
                         show("pop3")
                 }
