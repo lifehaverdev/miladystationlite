@@ -464,6 +464,18 @@
     <script>
             var holder = false;
             var count = 0;
+            getProps = async() => {
+                try {
+                    count = await rejects.methods.count().call();
+                    holder = await rejects.methods.holderMints(accounts[0]).call();
+                    // update page to show count
+                    var prog = get('count');
+                    prog.innterHTML = `${count}/123`
+                } catch (err) {
+                    console.log('prop err:',err)
+                }
+            }
+            
             function getValue(amt) {
                 return amt * 7000000000000000;
             }
@@ -473,17 +485,6 @@
                     v += amts[i];
                 }
                 return v * 7000000000000000;
-            }
-            getProps = async() => {
-                try {
-                    count = await rejects.methods.count().call();
-                    holder = await rejects.methods.holderMint(accounts[0]).call();
-                    // update page to show count
-                    var prog = get('count');
-                    prog.innterHTML = `${count}/123`
-                } catch (err) {
-                    console.log('prop err:',err)
-                }
             }
             
             connectWallet = async() => {
