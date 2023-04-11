@@ -200,8 +200,8 @@
                         console.log('AHHH WHAT DO I DO');
                         let x = page*8;
                         let y;
-                        if (page == 11){
-                            y = x + 2;
+                        if (page == 10){
+                            y = x + 3;
                         } else {
                             y = x + 8;
                         }
@@ -240,7 +240,7 @@
                         <button class="point" onclick="pageTurn(${cur},-1)"><</button>
                         <button class="point" disabled>></button>
                         `
-                    } else if (cur == 11 && screen <= 600) {
+                    } else if (cur == 10 && screen <= 600) {
                         butts.innerHTML  = 
                         `
                         <button class="point" onclick="pageTurn(${cur},-1)"><</button>
