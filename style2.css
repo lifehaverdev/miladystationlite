@@ -148,6 +148,7 @@ body {
     width: 80vw;
     flex-wrap: wrap;
     align-items: center;
+    outline: none;
 }
 .x {
     outline: 12px;
