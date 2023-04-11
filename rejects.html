@@ -93,11 +93,12 @@
             // cart
                 var items = [];
                 var amounts = [];
-                function getAmmo(items) {
+                function getAmmo() {
                     let ammos = new Array(items.length);
                     for (let i = 0; i < ammos.length; i++) {
                         ammos[i] = 1;
                     }
+                    return ammos;
                 }
                 function cartFlow(items) {
                     //if holder give free
@@ -106,20 +107,14 @@
                         if (items.length == 1) {
                             return `<button class="mint-button" onclick="mintSingleFreeMerkle(${items[0]},1)">Lock in</button>`
                         } else {
-                            amounts = new Array(items.length);
-                            for (let i = 0; i < amounts.length; i++) {
-                                amounts[i] = 1;
-                            }
+                            amounts = getAmmo();
                             return `<button class="mint-button" onclick="mintBatchFreeMerkle(items,amounts)">Lock in</button>`
                         }
                     } else {
                         if (items.length == 1) {
                             return `<button class="mint-button" onclick="mintSingle(${items[0]},1)">Lock in</button>`
                         } else {
-                            amounts = new Array(items.length);
-                            for (let i = 0; i < amounts.length; i++) {
-                                amounts[i] = 1;
-                            }
+                            amounts = getAmmo();
                             return `<button class="mint-button" onclick="mintBatch(items,amounts)">Lock in</button>`
                         }
                         return '<div><button class="mint-button">holder</button></div>'
