@@ -168,12 +168,17 @@ body {
 }
 .angel-grid {
     display: flex;
-    width: 80vh;
+    width: 80vw;
     flex-wrap: wrap;
     align-items: center;
 }
+
 .grid-item{
     flex-basis: calc(33.33% - 10px);
+    margin-bottom: 10px;
+}
+.grid-item-m {
+    flex-basis: calc(50% - 10px);
     margin-bottom: 10px;
 }
 .angel-img {
