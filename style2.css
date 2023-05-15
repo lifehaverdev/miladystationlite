@@ -5,7 +5,7 @@ body {
     display: flex;
     align-content: center;
     justify-content: center;
-    height: 100vh;
+    height: 110vh;
     color: white;
 }
 #boot {
@@ -47,8 +47,10 @@ body {
     color: white;
     z-index: 1;
     margin: 40px;
+    overflow-y: scroll;
 }
 #pop1 img {
+    width: 80%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -85,6 +87,30 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+#pop4 {
+    display: none;
+    background-image: url("public/water.gif");
+    outline: 4px;
+    width: 75vw;
+    overflow-y: scroll;
+}
+#pop4 img{
+    width: 60%;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+#receipt {
+    width: 70%;
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: black;
+    opacity: 70%;
+    padding: 5%;
+    background-blend-mode: normal;
+    overflow-wrap: break-word;
+}
 #cart-button {
     display: none;
     width: 33%;
@@ -104,10 +130,14 @@ body {
 .cart-items img {
     width: 20%; 
 }
-.cart-items .cart-desc {
-    background-color: black;
-    background-blend-mode: screen;
-
+.cart-item-title {
+    background-color: #9a5de8;
+    background-blend-mode: exclusion;
+    outline-color: azure;
+    outline-style: groove;
+    outline-width: 3px;
+    opacity: 60%;
+    outline-offset: 3px;
 }
 .cart-desc {
     justify-content: center;
@@ -184,6 +214,9 @@ body {
 }
 .angel-img {
     width: 102px;
+}
+.white-link {
+    font-color: ivory;
 }
 #info {
     display: none;
