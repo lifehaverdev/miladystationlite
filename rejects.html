@@ -44,7 +44,7 @@
             
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://sepolia.infura.io/ws/v3/3d54d62605b14e1c94fca9debcdee0fc');
 
-            const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
+            const web3 = new Web3(Web3.givenProvider) // || 'http://localhost:8545');
             //console.log('web3 object',web3)
 
             //btw this is thet ipfs of the images
@@ -614,8 +614,8 @@
                 } catch(err) {
                     console.log('not connected');
                     console.log(err.message);
-                    // showSelection();
-                    // showAngels(0);
+                    showSelection();
+                    showAngels(0);
                 }   
                 if(connected){
                     var connectbutt = document.getElementById('connect-button');
