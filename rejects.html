@@ -486,17 +486,17 @@
                 <h1>About</h1>
                 <h3 class="point" onclick="showSelection()">Back to Selection</h3>
                 <p>
-                    Welcome to the Rejects collection, where you'll find some of the most powerful and unique NFTs on Ethereum. These player characters were originally rejected from our flagship collection, MiladyStation, due to their extraordinary abilities and otherworldly qualities. But now, we're releasing them into the world for free, exclusively for our holders.
+                    Welcome to the MiladyStation MissingNo. collection, where you'll find some of the most powerful and unique NFTs on Ethereum. These player characters were originally rejected from our flagship collection, MiladyStation, due to their extraordinary abilities and otherworldly qualities. But now, we're releasing them into the world for free, exclusively for our holders.
                 </p>
                 <p>
-                    The Rejects collection is built on the ERC1155 standard, which means that each NFT is a unique and indivisible asset that can be owned and traded on the Ethereum blockchain. We've also designed the minting process to be a "mint your own" experience, which means that you'll be able to create your own NFTs with custom metadata and properties. This gives you full control over your collection and allows you to express your creativity in unique ways.
+                    The MissingNo. collection is built on the ERC1155 standard, which means that each NFT is a unique and indivisible asset that can be owned and traded on the Ethereum blockchain. We've also designed the minting process to be a "mint your own" experience, which means that you'll be able to choose which token you want to mint. This gives you full control over your collection and allows you to express your creativity in unique ways.
                 </p>
                 <p>
-                    However, we must warn you that owning a Reject is not for the faint of heart. These fallen angels are powerful and mysterious, and they require a certain level of responsibility and ownership from their owners. You'll need to take care of them, protect them, and make sure they're used for good purposes. But if you're up for the challenge, the Rejects collection is waiting for you.
+                    However, we must warn you that owning a MissingNo. is not for the faint of heart. These fallen angels are powerful and mysterious, and they require a certain level of responsibility and ownership from their owners. You'll need to take care of them, protect them, and make sure they're used for good purposes. But if you're up for the challenge, the Rejects collection is waiting for you.
                 </p>
                 </br>
                 <p>
-                    MiladyStation holders can enjoy 3 free mints choosing whichever Reject Angels speak to them. Be careful. If you fail to choose 3, you cannot come back and get the rest of your freebies.
+                    MiladyStation holders can enjoy 3 free mints choosing whichever MissingNo. speaks to them. Be careful. If you fail to choose 3, you cannot come back and get the rest of your freebies.
                 </p>
                 <p>
                     For everyone else, each angel costs .007 to mint.
@@ -614,8 +614,8 @@
                 } catch(err) {
                     console.log('not connected');
                     console.log(err.message);
-                    showSelection();
-                    showAngels(0);
+                    // showSelection();
+                    // showAngels(0);
                 }   
                 if(connected){
                     var connectbutt = document.getElementById('connect-button');
@@ -627,9 +627,10 @@
                     // console.log(networkId);
                     // foundry testing
                     //if (networkId !== 11155111) {
-                    if (networkId == 31337) {
+                    //if (networkId == 31337) {
                     // Show an error message or take other appropriate action
-                    alert('your network foundry')
+                    if (networkId != 1) {
+                    alert('switch to ethereum main')
                     }
                     friend = checkWL(accounts[0]);
                     console.log('friend',friend);
