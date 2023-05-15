@@ -152,6 +152,7 @@ body {
 }
 .cart {
     width: 700px;
+    overflow-y: scroll;
 }
 .cart img {
     width: 512px;
@@ -216,7 +217,7 @@ body {
     width: 102px;
 }
 .white-link {
-    font-color: ivory;
+    color: ivory;
 }
 #info {
     display: none;
