@@ -25,8 +25,8 @@ const options = [
     {
         name: "Power Packs Onchained",
         image: "public/main/ppo.gif",
-        //url: "https://miladystation.net/ppo"
-        url: "#home"
+        //url: "#home"
+        url: "PPO.html"
     },
     {
         name: "MiladyCola",
@@ -46,7 +46,7 @@ const options = [
     {
         name: "Arthurt Stream",
         image: "public/main/sanko.gif",
-        url: "https://sanko.tv/miladystation"
+        url: "https://sanko.tv/MiladyStation"
     }
 
 ];
