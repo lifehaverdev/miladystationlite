@@ -119,10 +119,15 @@ async function settings() {
     phase = "settings";
     get('close-settings').style.display = "inline-block";
     playSprite('click');
-    let name = await getName(accounts[0])
-    if(name.length > 40){
-        name = name.slice(0,5) + '...' + name.slice(40,42);
+    if(onChained){
+        let name = await getName(accounts[0])
+        if(name.length > 40){
+            name = name.slice(0,5) + '...' + name.slice(40,42);
+        }
+    } else {
+        let name = '';
     }
+
     if(onChained){
         document.body.innerHTML += 
         create("div","settings","","",
@@ -318,7 +323,7 @@ function auth(){
         walletButton
         +
         create(
-            "button","wallet-ask","float centered-button web3","charMenu()","play-offline"
+            "button","wallet-ask","float centered-button web3","playOffline()","play-offline"
         )
     )
     get('bar').style.display = "none";

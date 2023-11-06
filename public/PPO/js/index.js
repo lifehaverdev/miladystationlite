@@ -60,6 +60,11 @@
 var level;
 var xp2next = 0;
 
+playOffline = () => {
+    onChained = false;
+    mainMenu();
+}
+
 getLevel = (_xp) => {
     let _level
     if(onChained){
@@ -508,6 +513,10 @@ async function tote() {
     )
     let bet = await readMaxBet();
     get('gamble').placeholder = `${bet.toString()}max`;
+    if(!onChained){
+        get('gamble').innerHTML = '';
+        get('challenge').innerHTML = '';
+    }
 }
 
 function battle() {
@@ -585,7 +594,7 @@ function wait() {
     phase = "wait";
     frame("","","wait","",
         create("div","","","",
-            `<img src="${pre}loading.gif"/>`
+            `<img src="${pre}assets/loading.gif"/>`
         )
     )
 }
