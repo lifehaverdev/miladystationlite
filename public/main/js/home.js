@@ -25,8 +25,7 @@ const options = [
     {
         name: "Power Packs Onchained",
         image: "public/main/ppo.gif",
-        //url: "#home"
-        url: "https://miladystation.net/PPO.html"
+        url: "https://miladystation.net/PPO"
     },
     {
         name: "MiladyCola",
