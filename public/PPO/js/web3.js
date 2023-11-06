@@ -59,7 +59,7 @@ connectWallet = async() => {
         if(networkId !== 421613){ //arb goerli
         //if(networkId !== 42161){ // arb one
         // Show an error message or take other appropriate action
-            alert('change your network to arbitrum and reload the page','https://faucet.quicknode.com/arbitrum/goerli/')//'https://bridge.arbitrum.io/')
+            alert('change your network to arbitrum goerli and reload the page','https://faucet.quicknode.com/arbitrum/goerli/')//'https://bridge.arbitrum.io/')
         }
         checkWallet();
     }
