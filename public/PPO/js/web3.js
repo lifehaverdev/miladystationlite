@@ -12,7 +12,7 @@
 
 const web3 = new Web3(Web3.givenProvider); 
 const owner = '0x8BA1335998d6aAF38217B5B8A70EA48506b58D17';
-const chainScanPre = 'https://arbiscan.io/address/';
+const chainScanPre = 'https://goerli.arbiscan.io/address/';
 var accounts = [];
 var team;
 var playerXP;
@@ -25,10 +25,10 @@ const masterABI = [{"inputs":[],"name":"claim","outputs":[],"stateMutability":"n
 const expABI = [{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint32","name":"","type":"uint32"},{"internalType":"uint32","name":"","type":"uint32"}],"name":"addValue","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"userName","type":"string"}],"name":"incorporate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint32","name":"char","type":"uint32"},{"internalType":"string","name":"title","type":"string"}],"name":"knight","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"id","type":"address"}],"name":"readCanon","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"id","type":"address"},{"internalType":"uint32","name":"char","type":"uint32"}],"name":"readPackExp","outputs":[{"internalType":"uint32","name":"xp","type":"uint32"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"readPlayers","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"id","type":"address"}],"name":"readRegistrar","outputs":[{"internalType":"uint32[6]","name":"","type":"uint32[6]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"id","type":"address"},{"internalType":"uint32","name":"char","type":"uint32"}],"name":"readRoster","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint32","name":"char","type":"uint32"}],"name":"readStats","outputs":[{"internalType":"uint256","name":"atk","type":"uint256"},{"internalType":"uint256","name":"def","type":"uint256"},{"internalType":"uint256","name":"spd","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint32[6]","name":"","type":"uint32[6]"}],"name":"register","outputs":[],"stateMutability":"nonpayable","type":"function"}]
 //const masterAdd = "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512";
 //const expAdd = "0xdc64a140aa3e981100a9beca4e685f962f0cf6c9"; test junk old script deploy
-//const expAdd = "0x587155305c898C363130D79c2068ec31329a1c98"; //arbitrum goerli foundry deploy 6
-//const masterAdd = "0x7863eCe6Ca2C15227f2B1A71d55d82d175915965"; //arbitrum goerli foundry deploy 5
-const expAdd = "0x527A84FB177fb4cF9FBc25a428c2BD2B955A2457"; //arbitrum main
-const masterAdd = "0x659b14e75E943A3597e3B8cBA33A877474D5DFca"; //arbitrum main
+const expAdd = "0x587155305c898C363130D79c2068ec31329a1c98"; //arbitrum goerli foundry deploy 6
+const masterAdd = "0x7863eCe6Ca2C15227f2B1A71d55d82d175915965"; //arbitrum goerli foundry deploy 5
+//const expAdd = "0x527A84FB177fb4cF9FBc25a428c2BD2B955A2457"; //arbitrum main
+//const masterAdd = "0x659b14e75E943A3597e3B8cBA33A877474D5DFca"; //arbitrum main
 
 const master = new web3.eth.Contract(masterABI, masterAdd);
 const exp = new web3.eth.Contract(expABI, expAdd);
@@ -56,10 +56,10 @@ connectWallet = async() => {
         var networkId = await web3.eth.net.getId();
         //console.log(networkId);
         //if (networkId !== 31337) { foundry eth
-        //if(networkId !== 421613){ //arb goerli
-        if(networkId !== 42161){ // arb one
+        if(networkId !== 421613){ //arb goerli
+        //if(networkId !== 42161){ // arb one
         // Show an error message or take other appropriate action
-            alert('change your network to arbitrum and reload the page','https://bridge.arbitrum.io/')
+            alert('change your network to arbitrum and reload the page','https://faucet.quicknode.com/arbitrum/goerli/')//'https://bridge.arbitrum.io/')
         }
         checkWallet();
     }
