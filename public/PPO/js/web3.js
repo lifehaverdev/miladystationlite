@@ -69,7 +69,7 @@ connectWallet = async() => {
 arm = async() => {
     playSprite('web3');
     var BN = web3.utils.BN;
-    get('fight').innerHTML = `<img src="./assets/loading.gif" />`
+    get('fight').innerHTML = `<img src="${assetPre}loading.gif" />`
     let _value = 0;
     let _credit = 0;
     let _account = await readBook(accounts[0]);
@@ -355,7 +355,7 @@ readCanon = async(address) => {
 readBusiness = async() => {
     if(onChained) {
         try{
-            open = await master.methods.readBusiness().call();
+            openBusiness = await master.methods.readBusiness().call();
         } catch(err) {
             console.log('readBusiness error: ',err);
         }
@@ -368,7 +368,7 @@ readBusiness = async() => {
 readTote = async() => {
     if(onChained) {
         try{
-            tote = await master.methods.readTote().call();
+            toteOpen = await master.methods.readTote().call();
         } catch(err) {
             console.log('readTote error: ',err);
         }
@@ -522,7 +522,7 @@ fund = async(amt) =>  {
 fakeConnectWallet = async () => {
     const butt = get("wallet-ask");
     butt.innerHTML = 
-        `<img src="loading.gif" alt="loading.."/>`
+        `<img src="${assetPre}loading.gif" alt="loading.."/>`
     // setTimeout(function (){
     //     console.log("simulating wallet connection");
     //     mainMenu();
