@@ -19,7 +19,7 @@
     const stageMax = 12;
     const charPre = 'char/';
     const totalSup = 222;
-    const assetPre = './public/PPO/';
+    const pre = './public/PPO/';
 
     //state
     var phase;
@@ -280,7 +280,7 @@ fullPackList = (page,p) => {
     packListPop = create('div','close','',`closeMemberView()`,'x');
     for(i=1+page*12;i<=12*(page+1);i++){
         packs += 
-            `<img src='${assetPre}${charPre}${i}.png' class='pack-choice' onclick='selectPack(${i},${p})'/>`
+            `<img src='${pre}${charPre}${i}.png' class='pack-choice' onclick='selectPack(${i},${p})'/>`
     }
     packListPop +=
             create('div','pack-list','','',
@@ -555,11 +555,11 @@ function fight() {
 
 function action() {
     return  create("div","game","","",
-                `<img src="${assetPre}stage/${arena}.png" alt="stage" id="arena" /> `
+                `<img src="${pre}stage/${arena}.png" alt="stage" id="arena" /> `
                 +
-                `<img src="${assetPre}char/${character}.png" alt="char0" id="player1" />`
+                `<img src="${pre}char/${character}.png" alt="char0" id="player1" />`
                 +
-                `<img src="${assetPre}char/${character1}.png" alt="char1" id="player2" />`
+                `<img src="${pre}char/${character1}.png" alt="char1" id="player2" />`
                 +
                 getStocks()
             )
@@ -570,10 +570,10 @@ function getStocks() {
     let p2s = `<div class="stocks stock1">`
     for(let i = 1; i < stocks + 1; i++){
         if(game.p1.stock + 1 > i){
-            p1s += `<img src="${assetPre}char/${character}.png" alt="stock0" id="0stock${i}" class="stock0"/>`;
+            p1s += `<img src="${pre}char/${character}.png" alt="stock0" id="0stock${i}" class="stock0"/>`;
         }
         if(game.p2.stock + 1 > i){
-            p2s += `<img src="${assetPre}char/${character1}.png" alt="stock1" id="1stock${i}" class="stock1"/>`;
+            p2s += `<img src="${pre}char/${character1}.png" alt="stock1" id="1stock${i}" class="stock1"/>`;
         }
     }
     p1s += "</div>"
@@ -585,7 +585,7 @@ function wait() {
     phase = "wait";
     frame("","","wait","",
         create("div","","","",
-            `<img src="${assetPre}loading.gif"/>`
+            `<img src="${pre}loading.gif"/>`
         )
     )
 }
@@ -692,13 +692,13 @@ function charList(){
     if(onChained){
         for(let i=0; i < 6; i++){
             chars += create("div",`${walletPacks[i]}`,"op char","",
-                `<img src="${assetPre}${charPre}${walletPacks[i]}.png" alt="char${walletPacks[i]}" class="pp"/>`    
+                `<img src="${pre}${charPre}${walletPacks[i]}.png" alt="char${walletPacks[i]}" class="pp"/>`    
             )
         }
     } else {
         for(let i = 1; i < 13; i++){
             chars += create("div",`${i}`,"op char","",
-                `<img src="${assetPre}${charPre}${i}.png" alt="char${i}" class="pp"/>`    
+                `<img src="${pre}${charPre}${i}.png" alt="char${i}" class="pp"/>`    
             )
         }
     }
@@ -710,13 +710,13 @@ function stageList(page) {
     if(onChained){
         for(i = 1 + stageMax*page; i < level + 2 && i <= stageMax + stageMax*page; i++){
             stages += create("div",`${i}`,"dest op","",
-                `<img src="${assetPre}stage/${i}.png" alt="stage${i}" class="stage" />`    
+                `<img src="${pre}stage/${i}.png" alt="stage${i}" class="stage" />`    
             )
         }
     } else {
         for(i = 1; i <= stageMax; i++){
             stages += create("div",`${i}`,"dest op","",
-                `<img src="${assetPre}stage/${i}.png" alt="stage${i}" class="stage" />`    
+                `<img src="${pre}stage/${i}.png" alt="stage${i}" class="stage" />`    
             )
         }
     }
@@ -734,7 +734,7 @@ loadCard = async(id) => {
     //character = parseInt(get(id).id);
     // console.log('loadcardchar',character)
     get("picked").innerHTML = 
-        `<img src="${assetPre}${charPre}${character}.png" id="chosen" alt="pack" />`
+        `<img src="${pre}${charPre}${character}.png" id="chosen" alt="pack" />`
     //stats(id)
     get('picked').children[0].style.classList = "card"
     console.log(get('picked').children[0].style.classList)
@@ -812,8 +812,8 @@ function summary() {
     +
     create('p','glance','','',
         `
-        <img src="${assetPre}char/${character}.png" />
-        <img src="${assetPre}stage/${arena}.png" />
+        <img src="${pre}char/${character}.png" />
+        <img src="${pre}stage/${arena}.png" />
         `
     );
 
