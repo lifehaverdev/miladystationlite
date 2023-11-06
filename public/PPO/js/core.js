@@ -205,14 +205,14 @@ function errorTell(msg) {
 // FLOW //
 //////////
 
-function next(){
+async function next(){
     console.log('current phase',phase)
     if(phase == "char"){
-        stageMenu();
+        await stageMenu();
         return
     }
     if(phase == "stage"){
-        tote();
+        await tote();
         return
     }
 }
