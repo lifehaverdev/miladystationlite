@@ -206,7 +206,7 @@ function errorTell(msg) {
 //////////
 
 async function next(){
-    console.log('current phase',phase)
+    //console.log('current phase',phase)
     if(phase == "char"){
         await stageMenu();
         return

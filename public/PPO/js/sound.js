@@ -51,7 +51,7 @@ function soundSwitch() {
         }
     } else {
         if("maincharstageresult".includes(phase)){
-            console.log('includes phase');
+            //console.log('includes phase');
             menuMusic.play();
         } else if ("battle".includes(phase)) {
             fightMusic.play();

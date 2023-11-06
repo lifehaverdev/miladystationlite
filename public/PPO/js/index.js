@@ -104,7 +104,7 @@ leaderBoard = async() => {
     let leaderboard = "";
     let _roster = await readPlayers();
     let seenWallets = [];
-    console.log('readplayers',_roster)
+    //console.log('readplayers',_roster)
     let roster = [];
     //loop roster to get exp
     for(i=0;i<_roster.length;i++){
@@ -676,13 +676,13 @@ function closeMemberView() {
 
 function selectPack(i, p) {
     playSprite('sparkle');
-    console.log('Picking pack', p, 'to be', i);
-    console.log('Wallet pack', walletPacks[p], 'should now be', i);
+    //console.log('Picking pack', p, 'to be', i);
+    //console.log('Wallet pack', walletPacks[p], 'should now be', i);
 
     walletPacks = [...walletPacks]; // Create a new copy of the array
 
     walletPacks[p] = i;
-    console.log('WalletPacks after change:', walletPacks);
+    //console.log('WalletPacks after change:', walletPacks);
     registerMenu();
 }
 
@@ -737,7 +737,7 @@ loadCard = async(id) => {
         `<img src="${pre}${charPre}${character}.png" id="chosen" alt="pack" />`
     //stats(id)
     get('picked').children[0].style.classList = "card"
-    console.log(get('picked').children[0].style.classList)
+    //console.log(get('picked').children[0].style.classList)
     stats(id);
     banner();
 }
@@ -797,7 +797,7 @@ function stageList(page) {
 }
 
 function reloadStages(page) {
-    console.log('page in reload',page)
+    //console.log('page in reload',page)
     playSprite('click');
     get('stageMenu').innerHTML = 
         create("div","stage-sel","float grid","",

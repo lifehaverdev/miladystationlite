@@ -12,7 +12,7 @@
 
 const web3 = new Web3(Web3.givenProvider); 
 const owner = '0x8BA1335998d6aAF38217B5B8A70EA48506b58D17';
-const chainScanPre = 'https://goerli.arbiscan.io/address/';
+const chainScanPre = 'https://arbiscan.io/address/';
 var accounts = [];
 var team;
 var playerXP;
@@ -25,8 +25,10 @@ const masterABI = [{"inputs":[],"name":"claim","outputs":[],"stateMutability":"n
 const expABI = [{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint32","name":"","type":"uint32"},{"internalType":"uint32","name":"","type":"uint32"}],"name":"addValue","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"userName","type":"string"}],"name":"incorporate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint32","name":"char","type":"uint32"},{"internalType":"string","name":"title","type":"string"}],"name":"knight","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"id","type":"address"}],"name":"readCanon","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"id","type":"address"},{"internalType":"uint32","name":"char","type":"uint32"}],"name":"readPackExp","outputs":[{"internalType":"uint32","name":"xp","type":"uint32"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"readPlayers","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"id","type":"address"}],"name":"readRegistrar","outputs":[{"internalType":"uint32[6]","name":"","type":"uint32[6]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"id","type":"address"},{"internalType":"uint32","name":"char","type":"uint32"}],"name":"readRoster","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint32","name":"char","type":"uint32"}],"name":"readStats","outputs":[{"internalType":"uint256","name":"atk","type":"uint256"},{"internalType":"uint256","name":"def","type":"uint256"},{"internalType":"uint256","name":"spd","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint32[6]","name":"","type":"uint32[6]"}],"name":"register","outputs":[],"stateMutability":"nonpayable","type":"function"}]
 //const masterAdd = "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512";
 //const expAdd = "0xdc64a140aa3e981100a9beca4e685f962f0cf6c9"; test junk old script deploy
-const expAdd = "0x587155305c898C363130D79c2068ec31329a1c98"; //arbitrum goerli foundry deploy 6
-const masterAdd = "0x7863eCe6Ca2C15227f2B1A71d55d82d175915965"; //arbitrum goerli foundry deploy 5
+//const expAdd = "0x587155305c898C363130D79c2068ec31329a1c98"; //arbitrum goerli foundry deploy 6
+//const masterAdd = "0x7863eCe6Ca2C15227f2B1A71d55d82d175915965"; //arbitrum goerli foundry deploy 5
+const expAdd = "0x527A84FB177fb4cF9FBc25a428c2BD2B955A2457"; //arbitrum main
+const masterAdd = "0x659b14e75E943A3597e3B8cBA33A877474D5DFca"; //arbitrum main
 
 const master = new web3.eth.Contract(masterABI, masterAdd);
 const exp = new web3.eth.Contract(expABI, expAdd);
@@ -39,13 +41,13 @@ console.log('version 1');
 
 connectWallet = async() => {
     playSprite('web3');
-    console.log('you clicked connect')
+    //console.log('you clicked connect')
     let connected = false;
     get('wallet-ask').innerHTML = `<img src="${assetPre}loading.gif" />`
     try {
         accounts = await web3.eth.requestAccounts().then()
         connected = true;
-        console.log('we see this');
+        //console.log('we see this');
         onChained = true;
     } catch(err) {
         errorTell(err.message);
@@ -54,9 +56,10 @@ connectWallet = async() => {
         var networkId = await web3.eth.net.getId();
         //console.log(networkId);
         //if (networkId !== 31337) { foundry eth
-        if(networkId !== 421613){ //arb goerli
+        //if(networkId !== 421613){ //arb goerli
+        if(networkId !== 42161){ // arb one
         // Show an error message or take other appropriate action
-            alert('change your network to arbitrum goerli','https://bridge.arbitrum.io/')
+            alert('change your network to arbitrum and reload the page','https://bridge.arbitrum.io/')
         }
         checkWallet();
     }
@@ -203,7 +206,7 @@ function loadScore(res) {
     for(let i = 0; i < score.length; i++){
         score[i] = res[i];
     }
-    console.log('score',score);
+    //console.log('score',score);
 }
 
 ///////////
@@ -227,7 +230,7 @@ getUserExp = async() => {
         // console.log('wallet packs',walletPacks[i])
         xp += parseInt(await readExp(accounts[0],walletPacks[i]));
     }
-    console.log('user exp', xp);
+    //console.log('user exp', xp);
     userXP = xp;
     return xp;
 }
@@ -238,7 +241,7 @@ getExternalExp = async (address) => {
     for(let i = 0; i < 6; i++){
         xp += parseInt(await readExp(address,team[i]));
     }
-    console.log('ext user exp',xp);
+    //console.log('ext user exp',xp);
     return xp;
 }
 
@@ -289,7 +292,7 @@ readRoster = async(address,char) => {
         } catch(err) {
             console.log('read roster error: ',err);
         }
-        console.log('title for ',address,'pack ',char,':',_title);
+        //console.log('title for ',address,'pack ',char,':',_title);
         return _title;
     } else {
         return '';
@@ -386,7 +389,7 @@ readFee = async() => {
         } catch(err) {
             console.log('readFee error: ',err);
         }
-        console.log('fee: ',_fee.toString());
+        //console.log('fee: ',_fee.toString());
         return _fee;
     } else {
         return 0;
@@ -416,7 +419,7 @@ readDub = async(gameId) => {
         } catch(err) {
             console.log('readDub error: ',err);
         }
-        console.log('readDub game:',gameId.toString(),' dub: ',dub);
+        //console.log('readDub game:',gameId.toString(),' dub: ',dub);
         return _dub;
     } else {
         return _dub;
@@ -431,7 +434,7 @@ readBook = async(address) => {
         } catch(err) {
             console.log('check book err', err);
         }
-        console.log('credit account balance: ',_balance.toString())
+        //console.log('credit account balance: ',_balance.toString())
         return _balance;
     } else {
         console.log('connect wallet');
@@ -446,7 +449,7 @@ readWinnings = async(address) => {
         } catch(err) {
             console.log('readWinnings error: ',err);
         }
-        console.log('winnings for ',address,' :',_winnings.toString());
+        //console.log('winnings for ',address,' :',_winnings.toString());
         return _winnings;
     } else {
         return 0;
@@ -461,7 +464,7 @@ readLosses = async(address) => {
         } catch(err) {
             console.log('readWinnings error: ',err);
         }
-        console.log('losses for ',address,' :',_losses.toString());
+        //console.log('losses for ',address,' :',_losses.toString());
         return _losses;
     } else {
         return 0;
@@ -476,7 +479,7 @@ readActivity = async() => {
         } catch(err) {
             console.log('readActivity err: ',err);
         }
-        console.log('games played: ',_act);
+        //console.log('games played: ',_act);
         return _act;
     } else {
         return 0;
