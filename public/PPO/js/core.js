@@ -45,7 +45,7 @@ function frame(idO, clastO, idI, clastI, bod) {
     if(phase == "battle" || phase == "wait"){
         get('back').disabled = true;
         get('cash-out').disabled = true;
-    } 
+    }
     
 }
 

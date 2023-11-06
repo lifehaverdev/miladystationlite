@@ -99,8 +99,8 @@ playerBio = async() => {
 
 leaderBoard = async() => {
     playSprite('menuButton');
-    phase = 'leaderboard';
     wait();
+    phase = 'leaderboard';
     let leaderboard = "";
     let _roster = await readPlayers();
     let seenWallets = [];
