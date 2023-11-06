@@ -18,7 +18,7 @@ var team;
 var playerXP;
 var found;
 var fee;
-var openBusiness = true;
+var openBusiness;
 var toteOpen;
 
 const masterABI = [{"inputs":[],"name":"claim","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"readActivity","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"player","type":"address"}],"name":"readBook","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"readBusiness","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"game","type":"uint256"}],"name":"readDub","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"readFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"player","type":"address"}],"name":"readLosses","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"readMaxBet","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"game","type":"uint256"}],"name":"readSchedule","outputs":[{"components":[{"internalType":"address","name":"player0","type":"address"},{"internalType":"uint32","name":"char","type":"uint32"},{"internalType":"uint32","name":"stock","type":"uint32"},{"internalType":"bool","name":"a","type":"bool"},{"internalType":"bool","name":"w","type":"bool"},{"internalType":"bool[10]","name":"score","type":"bool[10]"},{"internalType":"uint256","name":"wager","type":"uint256"}],"internalType":"struct IPPOMaster.Game","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"readTote","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"player","type":"address"}],"name":"readWinnings","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"p","type":"address"},{"internalType":"uint32","name":"c","type":"uint32"},{"internalType":"uint32","name":"s","type":"uint32"},{"internalType":"uint32","name":"st","type":"uint32"},{"internalType":"uint256","name":"wager","type":"uint256"}],"name":"sponsor","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}]
@@ -41,7 +41,7 @@ connectWallet = async() => {
     playSprite('web3');
     console.log('you clicked connect')
     let connected = false;
-    get('wallet-ask').innerHTML = '<img src="assets/loading.gif" />'
+    get('wallet-ask').innerHTML = `<img src="${assetPre}loading.gif" />`
     try {
         accounts = await web3.eth.requestAccounts().then()
         connected = true;
@@ -51,19 +51,20 @@ connectWallet = async() => {
         errorTell(err.message);
     }   
     if(connected){
-        //var connectbutt = document.getElementById('connectbutt-text');
-        //connectbutt.innerText = 'Connected';
-        
         var networkId = await web3.eth.net.getId();
         //console.log(networkId);
         //if (networkId !== 31337) { foundry eth
-        if(networkId !== 421613){
+        if(networkId !== 421613){ //arb goerli
         // Show an error message or take other appropriate action
-        alert('change your network to arbitrum goerli','https://bridge.arbitrum.io/')
+            alert('change your network to arbitrum goerli','https://bridge.arbitrum.io/')
         }
         checkWallet();
     }
 }
+
+////////////
+// battle //
+////////////
 
 arm = async() => {
     playSprite('web3');
@@ -181,21 +182,6 @@ claim = async() => {
 
 }
 
-///////////
-// state //
-///////////
-
-checkWallet = async() => {
-    playSprite('sparkle');
-    walletPacks = await exp.methods.readRegistrar(accounts[0]).call()
-    fee = await readFee();
-    //await readBusiness();
-    //await readTote();
-    await getUserExp();
-    console.log('team: ',walletPacks);
-    mainMenu();
-}
-
 checkGame = async(id) => {
     let a = false;
     let game;
@@ -220,6 +206,21 @@ function loadScore(res) {
     console.log('score',score);
 }
 
+///////////
+// state //
+///////////
+
+checkWallet = async() => {
+    playSprite('sparkle');
+    walletPacks = await exp.methods.readRegistrar(accounts[0]).call()
+    fee = await readFee();
+    await readBusiness();
+    await readTote();
+    await getUserExp();
+    console.log('team: ',walletPacks);
+    mainMenu();
+}
+
 getUserExp = async() => {
     let xp = 0;
     for(let i = 0; i < 6; i++){
@@ -240,6 +241,10 @@ getExternalExp = async (address) => {
     console.log('ext user exp',xp);
     return xp;
 }
+
+//////////////
+// exp send //
+//////////////
 
 register = async() => {
     if(onChained){
@@ -267,15 +272,6 @@ incorporate = async() => {
 ////////////////////////
 // EXP READ FUNCTIONS //
 ////////////////////////
-
-/*
-
-    function readExp(address id, uint32 char) external returns (uint32 xp);
-    function readRoster(address id, uint32 char) external returns (string memory);
-    function readStats(uint32 char) external view returns (uint256 atk, uint256 def, uint256 spd);
-    function readPlayers() external view returns (address[] memory) ;
-    function readRegistrar(address id) external returns(Team memory);
-*/
 
 readPlayers = async() => {
     try {
@@ -352,6 +348,10 @@ readCanon = async(address) => {
     }
 }
 
+/////////////////////////
+// LVL1 READ FUNCTIONS //
+/////////////////////////   
+
 readBusiness = async() => {
     if(onChained) {
         try{
@@ -377,42 +377,6 @@ readTote = async() => {
         return;
     }
 }
-
-/////////////////////////
-// LVL1 READ FUNCTIONS //
-/////////////////////////   
-
-/*
-
-    function readSchedule(uint256 game) external view returns (Game memory);
-    function readDub(uint256 game) external view returns (bool);
-    function readBook(address player) external view returns (uint256);
-    function readWinnings(address player) external view returns (uint256);
-    function readLosses(address player) external view returns (uint256);
-    function readActivity() external view returns (uint256);
-    function readMaxBet() external view returns(uint256);
-
-    format => {
-        let _returnVariableName = initialState
-        if(onChained){
-            try {
-                _returnVariableName = await contract.methods.function(arguments...).call();
-                //if its a number use BN
-            } catch(err) {
-                console.log('functionName error: ",err)
-            }
-            console.log('returnVariable', _returnVariableName //.toString() if number);
-            return _returnVariableName
-        } else {
-            return returnVariableName
-        }
-    }
-
-
-
-
-
-*/
 
 readFee = async() => {
     let _fee = 0;
@@ -522,32 +486,29 @@ readActivity = async() => {
 
 readMaxBet = async() => {
     let _balance = 0;
-    let _fairGame = 0;
     let _maxBet = 0;
     if(onChained){
-        await web3.eth.getBalance(masterAdd, (err, balance) => {
-            if (!err) {
-                _balance = web3.utils.BN(balance);
-            } else {
-                console.error('check health Error:', err);
-            }
-            //return _balance;
-        });
-        console.log('Contract balance:', _balance.toString());
-        _maxBet = web3.utils.BN(await master.methods.readMaxBet().call());
+        try {
+            _maxBet = web3.utils.BN(await master.methods.readMaxBet().call());
+            await web3.eth.getBalance(masterAdd, (err, balance) => {         
+                if (!err) {
+                    _balance = web3.utils.BN(balance);
+                } else {
+                    console.error('check health Error:', err);
+                }
+            });
+            console.log('Contract balance:', _balance.toString());
+        } catch (err) {
+            console.log('read max bet erro',err);
+        }
     }
     console.log('max bet from contract: ',_maxBet.toString());
-
     return _maxBet;
 }
 
-//function insertCoin() {}
-
-//function getProps() {}
-
-//function checkBack() {}
-
-////JAVASCRIPT FAKE WEB3
+///////////////////
+//// FAKE WEB3 ////
+///////////////////
 
 fund = async(amt) =>  {
     fakeTransaction(`pls pay ${amt} ETH to play`);
@@ -644,48 +605,4 @@ function vrf(num) {
 function simRf(odd) {
     const random = Math.random();
     return random < odd;
-}
-
-function getPrizeSim(wage, odd) {
-    return (wage * (.5 / odd));
-}
-
-function printMulti() {
-    for(let i = 0; i < 100; i++){
-        let odd = (i/100);
-        console.log('odd',odd,'multi',(1 * (.5/odd) * (1.5 - odd)))
-    }
-}
-
-function sim(odd) {
-    var play = 100;
-    var tabl = 0;
-    var purs = 1000;
-    var wage;
-    const turn = 1000;
-
-    wage = 1;
-    var count = 10000;
-    while(play > 0 && count > 0 && tabl < purs){
-        if(tabl < wage){
-            play = play - (wage - tabl);
-            tabl = tabl + (wage - tabl);
-            purs = purs + (wage - tabl);
-        }
-        if(tabl > 10){
-            play = play + tabl;
-            purs = purs - tabl;
-            tabl = 0;
-        }
-        var game = simRf(odd);
-        if(game){
-            //win
-            tabl = tabl + getPrizeSim(wage,odd);
-        } else {
-            tabl = tabl - wage;
-        }
-        count --;
-    }
-    console.log(`sim complete for odds ${odd} table:`,tabl,'player',play,'purs',purs)
-
 }

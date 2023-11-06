@@ -13,7 +13,7 @@
 
 const soundPre = './public/PPO/sounds/'
 
-var soundEffects = "smash";
+var soundEffects = "smash"; //default soundeffects, pokemon soon
 
 const titleMusic = new Howl ({
     src: [soundPre+'title.mp3'],
@@ -114,6 +114,11 @@ function volume() {
     }
 }
 
+///////////////////
+// howler config //
+///////////////////
+// grafted from their examples
+
 /**
  * Player class containing the state of our playlist and where we are in it.
  * Includes all methods for playing, skipping, updating the display, etc.
@@ -123,8 +128,6 @@ var Player = function(playlist) {
   this.playlist = playlist;
   this.index = 0;
   var isPlaying;
-  // Display the title of the first track.
-  //track.innerHTML = '1. ' + playlist[0].title;
 };
 Player.prototype = {
   /**
@@ -138,70 +141,30 @@ Player.prototype = {
 
     index = typeof index === 'number' ? index : self.index;
     var data = self.playlist[index];
-    // If we already loaded this track, use the current one.
-    // Otherwise, setup and load a new Howl.
     if (data.howl) {
       sound = data.howl;
     } else {
       sound = data.howl = new Howl({
         src: [soundPre + 'st/' + data.file + '.mp3'],
         html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
-        onplay: function() {
-          // Display the duration.
-          //duration.innerHTML = self.formatTime(Math.round(sound.duration()));
-
-          // Start updating the progress of the track.
-          //requestAnimationFrame(self.step.bind(self));
-
-          // Start the wave animation if we have already loaded
-        //   wave.container.style.display = 'block';
-        //   bar.style.display = 'none';
-        //   pauseBtn.style.display = 'block';
-        },
-        onload: function() {
-          // Start the wave animation.
-        //   wave.container.style.display = 'block';
-        //   bar.style.display = 'none';
-        //   loading.style.display = 'none';
-        },
+        // onplay: function() {
+        // },
+        // onload: function() {
+        // },
         onend: function() {
-          // Stop the wave animation.
-        //   wave.container.style.display = 'none';
-        //   bar.style.display = 'block';
           self.skip();
         },
-        onpause: function() {
-          // Stop the wave animation.
-        //   wave.container.style.display = 'none';
-        //   bar.style.display = 'block';
-        },
-        onstop: function() {
-          // Stop the wave animation.
-        //   wave.container.style.display = 'none';
-        //   bar.style.display = 'block';
-        },
-        onseek: function() {
-          // Start updating the progress of the track.
-          //requestAnimationFrame(self.step.bind(self));
-        }
+        // onpause: function() {
+        // },
+        // onstop: function() {
+        // },
+        // onseek: function() {
+        // }
       });
     }
 
     // Begin playing the sound.
     sound.play();
-
-    // Update the track display.
-    //track.innerHTML = (index + 1) + '. ' + data.title;
-
-    // Show the pause button.
-    // if (sound.state() === 'loaded') {
-    //   playBtn.style.display = 'none';
-    //   pauseBtn.style.display = 'block';
-    // } else {
-    //   loading.style.display = 'block';
-    //   playBtn.style.display = 'none';
-    //   pauseBtn.style.display = 'none';
-    // }
 
     // Keep track of the index we are currently playing.
     self.index = index;
@@ -241,8 +204,8 @@ Player.prototype = {
      */
     skip: function(direction) {
         var self = this;
-        console.log('skipping now')
-        console.log('self index',self.index);
+        //console.log('skipping now')
+        //console.log('self index',self.index);
         // Get the next track based on the direction of the track.
         var index = 0;
         if (direction === 'prev') {
@@ -298,19 +261,6 @@ var Sprite = function(options) {
 
 };
 Sprite.prototype = {
-    /**
-     * Setup the listeners for each sprite click area.
-     */
-    // setupListeners: function() {
-    //   var self = this;
-    //   var keys = Object.keys(self._spriteMap);
-  
-    //   keys.forEach(function(key) {
-    //     window[key].addEventListener('click', function() {
-    //       self.play(key);
-    //     }, false);
-    //   });
-    // },
   
     /**
      * Play a sprite when clicked and track the progress.
@@ -330,6 +280,10 @@ Sprite.prototype = {
     }
 
 };
+
+//////////
+// init //
+//////////
 
 const menuMusic = new Player([
   {
@@ -394,7 +348,7 @@ const smashFX = new Sprite({
         homerun: [60303,62199],
         selection: [77200,77654],
         startButton: [98724,99017],
-        menuButton: [99919,100058],//1:39.919 - 1:40.058 == 60000 + 39000 + 919 - 60000 + 40000 + 058
+        menuButton: [99919,100058],
         hit: [108042, 108203],
         sparkle: [119104,119595]
     },

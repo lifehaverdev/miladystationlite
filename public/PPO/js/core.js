@@ -41,26 +41,6 @@ function frame(idO, clastO, idI, clastI, bod) {
                 bar()
             )
         )
-    } else {
-        cast(
-            create("div",idO,"container "+clastO,"",
-                create("div",idI,"container "+clastI,"",
-                    bod
-                )
-                +
-                create("div","bar","","",
-                    create("button","back","","back()","BACK")
-                    +
-                    create("button","vol","","soundSwitch()",`${volume()}`)
-                    +
-                    create("div","balance","","",
-                        create("h3","wallet","","",`WINS:${streak}`)
-                    )
-                    +
-                    create("button","cash-out","","settings()","Menu")
-                )
-            )
-        )
     }
     if(phase == "battle" || phase == "wait"){
         get('back').disabled = true;
@@ -119,19 +99,20 @@ async function settings() {
     phase = "settings";
     get('close-settings').style.display = "inline-block";
     playSprite('click');
+    let _name = '';
     if(onChained){
-        let name = await getName(accounts[0])
-        if(name.length > 40){
-            name = name.slice(0,5) + '...' + name.slice(40,42);
+        _name = await getName(accounts[0])
+        if(_name.length > 12){
+            _name = _name.slice(0,5) + '...' + _name.slice(_name.length - 2,_name.length);
         }
     } else {
-        let name = '';
+        _name = 'PLAYER';
     }
 
     if(onChained){
         document.body.innerHTML += 
         create("div","settings","","",
-            create("p","","settings-option","playerBio()",`${name}`)
+            create("p","","settings-option","playerBio()",`${_name}`)
             +
             create("p","","settings-option","",
                 create("div","","settings-button","leaderBoard()","LEADERBOARD")
@@ -241,34 +222,23 @@ function back(){
     setTimeout(()=>{
         if(phase == "main"){
             start();
-        } else if(phase == "char") {
-            mainMenu();
         } else if(phase == "stage"){
             charMenu();
-        } else if(phase == "result" || phase == "register" || phase == "bio" || phase == "leaderboard"){
+        } else if(
+            phase == "result" || 
+            phase == "register" || 
+            phase == "bio" || 
+            phase == "leaderboard" ||
+            phase == "char" ||
+            phase == "settings" ||
+            phase == "team"
+        ){
             mainMenu();
-        } else if(phase == "settings" || phase == "team"){
-            tote();
         } else if(phase == "tote"){
             stageMenu();
         }
     },300);
 
-}
-
-function resume(){
-    playSprite('back');
-    setTimeout(()=>{
-        if(phase == "main"){
-            mainMenu();
-        } else if(phase == "char") {
-            charMenu();
-        } else if(phase == "stage"){
-            stageMenu();
-        } else if(phase == "result"){
-            result();
-        }
-    },300); 
 }
 
 function boot(){
@@ -329,56 +299,3 @@ function auth(){
     get('bar').style.display = "none";
 }
 
-function mainMenu(){
-    phase = "main"
-    playSprite('menuButton');
-    //console.log('main menu wallet packs',walletPacks.length);
-    if(walletPacks[0] > 0 && openBusiness){
-        frame("","inside","option","option",
-            create("ul","","list","",
-                create("li","","option","",
-                    create("button","","float","charMenu()","Campaign")
-                )
-                +
-                create("li","","option","",
-                    create("button","multi","float","multiFlow()","Create Multiplayer Game")
-                )
-                +
-                create("li","","option","",
-                    create("button","join","float","joinFlow()","Join Multiplayer Game")
-                )
-                +
-                create("li","","option","",
-                    create("button","watch","float","spectate()","Spectate")
-                )
-            )
-        )
-        get("multi").disabled = true;
-        get("join").disabled = true;
-        get("watch").disabled = true;
-    } else if(walletPacks[0] == 0 && openBusiness) {
-        frame("","inside","option","option",
-            create("p","","","","We see you haven't registered, you need to choose your team before you can fight. If you'd like to play online, please register your team.")
-            +
-            create("ul","","list","",
-                create("li","","option","",
-                    create("button","","float","registerMenu()","Register")
-                )
-                +
-                create("li","","option","",
-                    create("button","","float","charMenu()","Play Offline")    
-                )
-            )
-        )
-    } else if(!openBusiness) {
-        frame("","inside","option","option",
-        create("p","","","","The arena is closed for maintenance right now. Check miladystation twitter for updates or go to the mony discord.")
-        +
-        create("ul","","list","",
-            create("li","","option","",
-                create("button","","float","charMenu()","Play Offline")    
-            )
-        )
-    )
-    }
-}
