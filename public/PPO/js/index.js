@@ -617,7 +617,7 @@ teamView = async() => {
     for(let i = 0; i < 6; i++){
         _teamView += create('div',`${i}`,'teamMember',`memberView(${i},0)`,
             `
-            <img src="${charPre}${_walletPacks[i]}.png" />
+            <img src="${pre}${charPre}${_walletPacks[i]}.png" />
             <p>#${_walletPacks[i]} ${_teamNames[i]} EXP:${_teamExp[i]}</p>
             <p class="right">ATK:${_teamStats[i].atk} DEF:${_teamStats[i].def} SPD:${_teamStats[i].spd}</p>
             `
