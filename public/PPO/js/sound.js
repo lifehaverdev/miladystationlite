@@ -300,7 +300,7 @@ const menuMusic = new Player([
   },
   {
     title: 'Power',
-    file: 'Power',
+    file: 'power',
     // howl: ttiffp
     howl: null
   },
