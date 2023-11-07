@@ -57,6 +57,7 @@
 
 playerBio = async(address) => {
     playSprite('menuButton');
+    wait();
     phase = 'bio';
     let bio = '';
     let _book;
@@ -135,6 +136,7 @@ leaderBoard = async() => {
 
 teamMenu = async(address) => {
     playSprite('menuButton');
+    wait();
     phase="team";
     _teamView = await teamView(address);
     _exp = await getExternalExp(address);
