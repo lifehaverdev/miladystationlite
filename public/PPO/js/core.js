@@ -112,14 +112,14 @@ async function settings() {
     if(onChained){
         document.body.innerHTML += 
         create("div","settings","","",
-            create("p","","settings-option",`playerBio(${accounts[0]})`,`${_name}`)
+            create("p","","settings-option",`playerBio('${accounts[0]}')`,`${_name}`)
             +
             create("p","","settings-option","",
                 create("div","","settings-button","leaderBoard()","LEADERBOARD")
             )
             +
             create("p","","settings-option","",
-                create("div","","settings-button",`teamMenu(${accounts[0]})`,`POWER PACKS`)
+                create("div","","settings-button",`teamMenu('${accounts[0]}')`,`POWER PACKS`)
             )
             +
             create("p","","settings-option","",
