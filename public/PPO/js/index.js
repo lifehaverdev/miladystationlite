@@ -269,7 +269,7 @@ registerMenu = async() => {
     frame('','','team','',
         create('p','','','',`Now, ${await getName(accounts[0])}, which Power Packs do you want?`)
         +
-        await teamView()
+        await teamView(accounts[0])
     )
     members = document.getElementsByClassName('teamMember');
     for(let x = 0;x<members.length;x++){

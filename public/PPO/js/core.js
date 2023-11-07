@@ -119,7 +119,7 @@ async function settings() {
             )
             +
             create("p","","settings-option","",
-                create("div","","settings-button","teamMenu()",`POWER PACKS`)
+                create("div","","settings-button",`teamMenu(${accounts[0]})`,`POWER PACKS`)
             )
             +
             create("p","","settings-option","",
