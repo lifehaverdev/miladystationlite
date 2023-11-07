@@ -104,6 +104,11 @@ leaderBoard = async() => {
     phase = 'leaderboard';
     let leaderboard = "";
     let _roster = await readPlayers();
+    if(_roster.length == 0){
+        console.log("no players");
+        mainMenu();
+        return
+    }
     let seenWallets = [];
     console.log('readplayers',_roster)
     let roster = [];
@@ -144,17 +149,20 @@ leaderBoard = async() => {
 }
 
 sortLeaderboard = async(roster) => {
-    for(let i=0; i< roster.length; i++){
-        roster[i].exp = await getExternalExp(roster[i].wallet);
+    if(roster.length > 0){
+        for(let i=0; i< roster.length; i++){
+            roster[i].exp = await getExternalExp(roster[i].wallet);
+        }
+        const sortedRoster = roster.slice().sort((a, b) => b.exp - a.exp);
+        for(let j=1; j<11; j++){
+            get(`wallet${j}`).innerHTML = sortedRoster[j-1].wallet;
+            get(`exp${j}`).innerHTML = sortedRoster[j-1].exp;
+        }
+        for(let k=1; k<11; k++){
+            get(`wallet${j}`).innerHTML = getName(sortedRoster[j-1].wallet);
+        }
     }
-    const sortedRoster = roster.slice().sort((a, b) => b.exp - a.exp);
-    for(let j=1; j<11; j++){
-        get(`wallet${j}`).innerHTML = sortedRoster[j-1].wallet;
-        get(`exp${j}`).innerHTML = sortedRoster[j-1].exp;
-    }
-    for(let k=1; k<11; k++){
-        get(`wallet${j}`).innerHTML = getName(sortedRoster[j-1].wallet);
-    }
+
 }
 
 teamMenu = async(address) => {
