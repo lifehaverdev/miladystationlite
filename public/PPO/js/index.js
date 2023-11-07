@@ -110,7 +110,7 @@ leaderBoard = async() => {
         return
     }
     let seenWallets = [];
-    console.log('readplayers',_roster)
+    //console.log('readplayers',_roster)
     let roster = [];
     //loop roster to get exp
     for(i=0;i<_roster.length;i++){
@@ -154,7 +154,7 @@ sortLeaderboard = async(roster) => {
             roster[i].exp = await getExternalExp(roster[i].wallet);
         }
         const sortedRoster = roster.slice().sort((a, b) => b.exp - a.exp);
-        for(let j=1; j<11; j++){
+        for(let j=1; j<11 && j<=roster.length; j++){
             get(`wallet${j}`).innerHTML = sortedRoster[j-1].wallet;
             get(`exp${j}`).innerHTML = sortedRoster[j-1].exp;
         }
