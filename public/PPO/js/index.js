@@ -159,7 +159,7 @@ sortLeaderboard = async(roster) => {
             get(`exp${j}`).innerHTML = sortedRoster[j-1].exp;
         }
         for(let k=1; k<11; k++){
-            get(`wallet${j}`).innerHTML = getName(sortedRoster[j-1].wallet);
+            get(`wallet${k}`).innerHTML = getName(sortedRoster[k-1].wallet);
         }
     }
 

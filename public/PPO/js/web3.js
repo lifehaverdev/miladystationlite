@@ -26,7 +26,7 @@ const expABI = [{"inputs":[{"internalType":"address","name":"","type":"address"}
 //const masterAdd = "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512";
 //const expAdd = "0xdc64a140aa3e981100a9beca4e685f962f0cf6c9"; test junk old script deploy
 const expAdd = "0xbE9FDCB860f1341946251a31820B674870930AcB"; //arbitrum goerli foundry deploy 8
-const masterAdd = "0x1aF423D5C446AB9B93a8fE06c745b9F0CCaa8A7e"; //arbitrum goerli foundry deploy 6
+const masterAdd = "0xb8013ef2286ab59bd4f961f7ed761e87b69117f3"; //arbitrum goerli foundry deploy 7
 //const expAdd = "0x527A84FB177fb4cF9FBc25a428c2BD2B955A2457"; //arbitrum main
 //const masterAdd = "0x659b14e75E943A3597e3B8cBA33A877474D5DFca"; //arbitrum main
 
