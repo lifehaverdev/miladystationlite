@@ -120,10 +120,10 @@ leaderBoard = async() => {
     //console.log('roster',roster);
     const sortedRoster = roster.slice().sort((a, b) => b.exp - a.exp);
     //populate leaderboard top 10
-    for(i=1;i<11&&i<=roster.length;i++){
+    for(i=1;i<11&&i<=sortedRoster.length;i++){
         leaderboard += 
             create("p","","","",
-                create("h3","","leaderboard",`teamMenu(${sortedRoster[i-1].wallet})`,
+                create("h3","","leaderboard",`teamMenu('${sortedRoster[i-1].wallet}')`,
                 `#${i}: ${await getName(sortedRoster[i-1].wallet)} : ${sortedRoster[i-1].exp}`
                 )
             );
@@ -137,8 +137,11 @@ teamMenu = async(address) => {
     playSprite('menuButton');
     phase="team";
     _teamView = await teamView(address);
+    _exp = await getExternalExp(address);
     frame('','','team','',
         `${_teamView}`
+        +
+        create('p','','','',`EXP: ${_exp}`)
     )
     if(level > 30){
         for(let x = 0;x<members.length;x++){
@@ -593,8 +596,6 @@ function noDuplicates() {
     }
     return true;
 }
-
-
 
 teamView = async(address) => {
     let _teamView = '';
