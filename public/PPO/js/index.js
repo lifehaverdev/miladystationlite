@@ -114,24 +114,47 @@ leaderBoard = async() => {
             seenWallets[wallet] = true;
             roster.push({
                 wallet: _roster[i],
-                exp: await getExternalExp(_roster[i])
+                exp: 0//await getExternalExp(_roster[i])
             })
         }
     }
-    //console.log('roster',roster);
-    const sortedRoster = roster.slice().sort((a, b) => b.exp - a.exp);
+    console.log('roster',roster);
+    //const sortedRoster = roster.slice().sort((a, b) => b.exp - a.exp);
     //populate leaderboard top 10
-    for(i=1;i<11&&i<=sortedRoster.length;i++){
+    for(i=1;i<11&&i<=roster.length;i++){
         leaderboard += 
             create("p","","","",
-                create("h3","","leaderboard",`teamMenu('${sortedRoster[i-1].wallet}')`,
-                `#${i}: ${await getName(sortedRoster[i-1].wallet)} : ${sortedRoster[i-1].exp}`
+                create('h3',`rank${i}`,'leaderboard','',`#${i}: `)
+                +
+                create("h3",`wallet${i}`,"leaderboard",`teamMenu('${roster[i-1].wallet}')`,
+                `${roster[i-1].wallet}`
+                //`${await getName(sortedRoster[i-1].wallet)} 
+                )
+                +
+                create('h3',`exp${i}`,'leaderboard','',
+                ` : <img src="${assetPre}loading.gif"/>`
+                //${sortedRoster[i-1].exp}`
                 )
             );
     }
-    frame("","","leaderboard",``,
+    frame("","","leaderboard","",
         leaderboard
     );
+    sortLeaderboard(roster);
+}
+
+sortLeaderboard = async(roster) => {
+    for(let i=0; i< roster.length; i++){
+        roster[i].exp = await getExternalExp(roster[i]);
+    }
+    const sortedRoster = roster.slice().sort((a, b) => b.exp - a.exp);
+    for(let j=1; j<11; j++){
+        get(`wallet${j}`).innerHTML = sortedRoster[j-1].wallet;
+        get(`exp${j}`).innerHTML = sortedRoster[j-1].exp;
+    }
+    for(let k=1; k<11; k++){
+        get(`wallet${j}`).innerHTML = getName(sortedRoster[j-1].wallet);
+    }
 }
 
 teamMenu = async(address) => {
