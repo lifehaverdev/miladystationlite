@@ -123,7 +123,7 @@ leaderBoard = async() => {
             })
         }
     }
-    console.log('roster',roster);
+    //console.log('roster',roster);
     //const sortedRoster = roster.slice().sort((a, b) => b.exp - a.exp);
     //populate leaderboard top 10
     for(i=1;i<11&&i<=roster.length;i++){
