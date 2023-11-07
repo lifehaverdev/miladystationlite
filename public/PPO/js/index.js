@@ -55,7 +55,7 @@
 // menu //
 //////////
 
-playerBio = async() => {
+playerBio = async(address) => {
     playSprite('menuButton');
     phase = 'bio';
     let bio = '';
@@ -63,11 +63,11 @@ playerBio = async() => {
     let canon = '';
     let name = '';
     if(onChained){
-        _book = (await readBook(accounts[0])).toString();
-        _winnings = (await readWinnings(accounts[0])).toString();
+        _book = (await readBook(address)).toString();
+        _winnings = (await readWinnings(address)).toString();
         _exp = userXP;
         _level = getLevel(_exp);
-        name = await getName(accounts[0]);
+        name = await getName(address);
     }
     if(_level > 11){
         canon = create('button','userName','','createUsername()','CREATE USERNAME');
@@ -123,14 +123,28 @@ leaderBoard = async() => {
     for(i=1;i<11&&i<=roster.length;i++){
         leaderboard += 
             create("p","","","",
-                create("h3","","leaderboard","",
+                create("h3","","leaderboard",`teamMenu(${sortedRoster[i-1].wallet})`,
                 `#${i}: ${await getName(sortedRoster[i-1].wallet)} : ${sortedRoster[i-1].exp}`
                 )
             );
     }
-    frame("","","leaderboard","",
+    frame("","","leaderboard",``,
         leaderboard
     );
+}
+
+teamMenu = async(address) => {
+    playSprite('menuButton');
+    phase="team";
+    _teamView = await teamView(address);
+    frame('','','team','',
+        `${_teamView}`
+    )
+    if(level > 30){
+        for(let x = 0;x<members.length;x++){
+            members[x].style.cursor = 'pointer';  
+        }
+    }
 }
 
 function openSea() {
@@ -580,32 +594,20 @@ function noDuplicates() {
     return true;
 }
 
-teamMenu = async() => {
-    playSprite('menuButton');
-    phase="team";
-    _teamView = await teamView();
-    frame('','','team','',
-        `${_teamView}`
-    )
-    if(level > 30){
-        for(let x = 0;x<members.length;x++){
-            members[x].style.cursor = 'pointer';  
-        }
-    }
-}
 
-teamView = async() => {
+
+teamView = async(address) => {
     let _teamView = '';
     let _teamNames = [];
     let _teamExp = [];
     let _teamStats = [];
-    let _walletPacks = walletPacks;
+    let _walletPacks = await readRegistrar(address);
     for(let j = 0; j < 6; j++){
-        _teamNames.push(await readRoster(accounts[0],_walletPacks[j]));
+        _teamNames.push(await readRoster(address,_walletPacks[j]));
         if(_teamNames[j] != ""){
             _teamNames[j] == `NAME: ${_teamNames[j]}`
         }
-        _teamExp.push(await readExp(accounts[0],_walletPacks[j]));
+        _teamExp.push(await readExp(address,_walletPacks[j]));
         let stat = await readStats(_walletPacks[j]);
         //console.log('stat',stat)
         _teamStats.push({
@@ -639,7 +641,7 @@ memberView = async(p,page) => {
             +
             create("button","page-next","page-button",`reloadPacks(${page}+1,${p})`,"+")
         );
-    } else if (phase="team" && level > 29){
+    } else if (phase="team" && level > 29 && address == accounts[0]){
         document.body.innerHTML += 
         create('div','registration','pop','',
             `
