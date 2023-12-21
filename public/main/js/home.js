@@ -56,6 +56,8 @@ function boot() {
         create("button","sound","","start(true)","SOUND")
         +
         create("button","quiet","","start(false)","NO SOUND")
+        +
+        create("button","","","mainMenu()","SKIP")
   )
 }
 
