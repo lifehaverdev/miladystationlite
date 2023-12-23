@@ -23,6 +23,11 @@ const cadence = {
 
 const options = [
     {
+        name: "Lawbstation on Solana",
+        image: "public/main/lawbstar.gif",
+        url: "https://launchmynft.io/collections/8chpN2hsfM4p6vrP1CGtb3Xx6mmhEqUTTaPEMEjCh3CL/8OqgRHHpbfE2B2Ex9nT5"
+    },
+    {
         name: "Power Packs Onchained",
         image: "public/main/ppo.gif",
         url: "https://miladystation.net/PPO"
