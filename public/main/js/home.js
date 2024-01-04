@@ -23,9 +23,9 @@ const cadence = {
 
 const options = [
     {
-        name: "Mint LawbStation on Solana",
+        name: "Buy LawbStation on Solana",
         image: "public/main/lawbstar.gif",
-        url: "https://launchmynft.io/collections/8chpN2hsfM4p6vrP1CGtb3Xx6mmhEqUTTaPEMEjCh3CL/8OqgRHHpbfE2B2Ex9nT5"
+        url: "https://www.tensor.trade/trade/lawbstation"
     },
     {
         name: "Power Packs Onchained",
