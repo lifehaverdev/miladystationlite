@@ -1,0 +1,152 @@
+/* Add animation keyframes for fade-in and bounce */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes knockOffRight {
+    0% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-100vh) translateX(100vw) rotate(45deg);
+    }
+}
+
+@keyframes knockOffLeft {
+    0% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-100vh) translateX(-100vw) rotate(-45deg);
+    }
+}
+
+@keyframes smashRight {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translate(30vw);
+    }
+}
+
+@keyframes smashLeft {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translate(-30vw);
+    }
+}
+
+/* Define the animation properties and keyframes */
+@keyframes spawnSlideIn {
+    0% {
+      top: -30%; /* Start position off the screen */
+      /* transform: translate(0, 0); */
+    }
+    100% {
+      top: 45%; 
+      /* transform: translate(0, 500%); Move vertically to the final position */
+    }
+}
+
+.spawn-slide {
+    animation: spawnSlideIn 1s ease forwards;
+}
+
+.smashR {
+    animation: smashRight .2s;
+}
+
+.smashL {
+    animation: smashLeft .2s;
+}
+  
+.knock-off-right {
+    animation: knockOffRight 1s ease-in-out; /* Adjust the duration as needed */
+    animation-fill-mode: forwards; /* Keeps the end state after animation */
+}
+
+.knock-off-left {
+    animation: knockOffLeft 1s ease-in-out; /* Adjust the duration as needed */
+    animation-fill-mode: forwards; /* Keeps the end state after animation */
+}
+
+/* Create a class for fade-in animation */
+.fade-in-out {
+    /* Add fade-in animation */
+    animation: fadeIn 1s ease-in-out;
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+.fade-out{
+    animation: fadeOut 1s ease-out;
+}
+
+/* Create a class for bounce animation */
+.bounce:hover {
+    /* Add bounce animation */
+    animation: bounce 0.4s ease-in-out;
+}
+
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.float2 {
+    animation: scaleX(-1), float 3s ease-in-out infinite;
+}
+
+#boot {
+    /* background-image: linear-gradient(to bottom, pink, yellow); */
+    background-color: white;
+    height: 101%;
+    width: 101%;
+    left: -0.5%;
+    top: -0.5%;
+}
+
+#logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    opacity: 0;
+}
