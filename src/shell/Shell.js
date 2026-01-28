@@ -8,6 +8,7 @@ import DiscRuntime from '../bios/DiscRuntime.js';
 import DiscStub from '../bios/DiscStub.js';
 import Classic from '../apps/classic/Classic.js';
 import PPO from '../apps/ppo/PPO.js';
+import Tubbystation from '../apps/tubbystation/Tubbystation.js';
 
 /* ── Route mapping built from APPS config ── */
 const ROUTE_TO_VIEW = {};
@@ -23,7 +24,7 @@ APPS.forEach(app => {
 const APP_COMPONENTS = {
   classic: Classic,
   ppo: PPO,
-  tubbystation: DiscStub,
+  tubbystation: Tubbystation,
   nononslide: DiscStub
 };
 
@@ -138,6 +139,7 @@ class Shell extends Component {
             App: AppComponent,
             appProps: {
               soundEnabled,
+              walletService: this.props.walletService,
               onBack: () => this.navigate('home')
             },
             onEject: () => this.navigate('home')

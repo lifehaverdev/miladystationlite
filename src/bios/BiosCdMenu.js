@@ -43,7 +43,9 @@ class BiosCdMenu extends Component {
       h('span', null, app.name),
       app.stub
         ? h('span', { className: 'disc-stub-badge' }, 'Soon')
-        : null
+        : app.badge
+          ? h('span', { className: 'disc-badge' }, app.badge)
+          : null
     );
   }
 

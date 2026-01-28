@@ -213,6 +213,17 @@ button:hover {
   letter-spacing: 0.05em;
 }
 
+.disc-badge {
+  margin-left: auto;
+  font-size: 0.65em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.15);
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+}
+
 /* ── Disc Stub (Coming Soon placeholder) ── */
 .disc-stub {
   width: 100%;
@@ -581,6 +592,8 @@ button:hover {
   width: 100vw;
   height: 100vh;
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* ── Shell error fallback ── */

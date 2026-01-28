@@ -1,6 +1,7 @@
 import './shell/shell.css';
 import './apps/classic/classic.css';
 import './apps/ppo/ppo.css';
+import './apps/tubbystation/tubbystation.css';
 import { render, h, eventBus } from '@monygroupcorp/microact';
 import { WalletService, IpfsService } from '@monygroupcorp/micro-web3';
 import Shell from './shell/Shell.js';
@@ -52,7 +53,7 @@ async function main() {
   }
 
   try {
-    await walletService.initialize();
+    await walletService.initialize({ autoReconnect: false });
     walletService.walletIcons = {
       rabby: createIconDataUri('RB', '#7c5dff'),
       rainbow: createIconDataUri('RB', '#ff8f70'),

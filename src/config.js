@@ -7,6 +7,7 @@ export const ASSET_BASE = 'public';        // matches Lite's relative asset refs
 export const MAIN_ASSETS = `${ASSET_BASE}/main`;
 export const PPO_ASSETS  = `${ASSET_BASE}/PPO`;
 export const CLASSIC_ASSETS = `${ASSET_BASE}/classic`;
+export const TUBBY_ASSETS = `${ASSET_BASE}/tubby`;
 
 /* ── CD Player: subdomain discs (shown flat at top level) ── */
 export const DISC_APPS = [
@@ -30,7 +31,7 @@ export const DISC_APPS = [
     image: `${MAIN_ASSETS}/tubbystation.avif`,
     route: 'tubbystation',
     external: false,
-    stub: true
+    badge: 'STILL MINTING'
   },
   {
     id: 'nononslide',
