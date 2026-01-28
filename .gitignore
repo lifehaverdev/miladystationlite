@@ -1,0 +1,17 @@
+node_modules
+dist
+
+# Dev notes & plans
+*.md
+!README.md
+docs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode
+.idea
+*.swp
+*.swo

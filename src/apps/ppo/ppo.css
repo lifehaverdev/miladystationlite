@@ -1,0 +1,382 @@
+/* ══════════════════════════════════════
+   PPO Game Styles
+   Ported from miladystationlite/public/PPO/style.css + anime.css
+   ══════════════════════════════════════ */
+
+/* ── Fonts ── */
+@font-face {
+  font-family: fight;
+  src: url('/public/PPO/fonts/Fight/Fight!.otf') format('opentype'),
+       url('/public/PPO/fonts/Fight/Fight!.woff2') format('woff2'),
+       url('/public/PPO/fonts/Fight/Fight!.woff') format('woff');
+}
+
+@font-face {
+  font-family: pixl;
+  src: url('/public/PPO/fonts/pokemon/Pokemon GB.woff') format('woff');
+}
+
+/* ── PPO Root ── */
+.ppo-root {
+  width: 100vw;
+  height: 100vh;
+  font-family: pixl, Arial, sans-serif;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.ppo-root button {
+  font-family: pixl, Arial, sans-serif;
+  padding-top: 1%;
+}
+
+.ppo-root .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ppo-root .inside {
+  background-image: url('/public/PPO/assets/bg.gif');
+}
+
+.ppo-root .centered-button {
+  margin: 2vh;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #0074D9;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* ── Option / Menu ── */
+.ppo-root #option {
+  background-image: linear-gradient(to bottom, pink, yellow);
+  height: 50vh;
+  width: 60vw;
+}
+
+.ppo-root .list {
+  padding-inline-start: 0px;
+  align-items: center;
+}
+
+.ppo-root .option {
+  list-style: none;
+  margin: 2vh 2vw;
+  text-align: center;
+}
+
+/* ── Character Select ── */
+.ppo-root .char {
+  background-color: gray;
+  background-image: url('/public/PPO/assets/electric-ball.gif');
+  margin: 0; padding: 0;
+  height: 90%; width: 90%;
+  align-self: center; justify-self: center;
+  overflow: hidden;
+}
+
+.ppo-root .stage {
+  background-color: gray;
+  height: 90%; width: 90%;
+  margin: 0; margin-left: 5%; margin-top: 5%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.ppo-root .dest { height: 20vh; overflow-x: hidden; }
+.ppo-root .choice { background-color: white; }
+
+.ppo-root #char-sel {
+  position: absolute; width: 80vw; height: 40vh;
+  top: 10vh; background-color: aquamarine;
+}
+
+.ppo-root #stage-sel {
+  position: absolute; width: 80vw; height: 80vh;
+  top: 10vh; background-color: aquamarine;
+}
+
+.ppo-root .grid {
+  display: grid; padding: 1%; overflow-y: auto;
+}
+
+.ppo-root .pp {
+  position: relative;
+  margin-left: auto; margin-right: auto;
+}
+
+/* ── Drag & Drop ── */
+.ppo-root #disc {
+  position: absolute; z-index: 4;
+}
+
+.ppo-root .draggable {
+  background-color: #29e; color: white;
+  border-radius: 50px;
+  touch-action: none; user-select: none;
+}
+
+.ppo-root .dragging { background-color: #24e; }
+
+.ppo-root #picked {
+  position: absolute; left: 15%; bottom: 3%;
+  background-image: url('/public/PPO/assets/steel.png');
+}
+
+.ppo-root #chosen {
+  height: 100%; align-self: center; position: relative;
+}
+
+.ppo-root #spec {
+  height: 40%; width: 20%; right: 10%;
+  position: absolute; bottom: 3%;
+}
+
+.ppo-root #param {
+  height: 20%; width: 20%; right: 10%;
+  position: absolute; bottom: 8%;
+}
+
+.ppo-root .stat { color: black; background-color: pink; }
+
+/* ── Tote / Summary ── */
+.ppo-root .sheet {
+  width: 90%; height: 90%;
+  text-align: center; overflow: scroll;
+}
+
+.ppo-root #gamble { width: 80%; }
+.ppo-root #glance { height: 10%; }
+.ppo-root #glance img { height: 100%; }
+
+.ppo-root .ctrl {
+  color: white; background-color: lightgreen;
+  height: 30px; width: 30px;
+}
+
+/* ── Battle ── */
+.ppo-root #match { background-color: black; }
+.ppo-root #arena { width: 100vw; max-height: 100vh; }
+
+.ppo-root #player1, .ppo-root #player2 {
+  position: absolute; height: 15%; z-index: 2;
+}
+
+.ppo-root #player1 { left: 20%; }
+.ppo-root #player2 { right: 20%; transform: scaleX(-1); }
+
+.ppo-root .stocks { height: 4%; position: absolute; }
+.ppo-root .stocks img { height: 100%; }
+.ppo-root .stock0 { left: 0%; }
+.ppo-root .stock1 { right: 0%; }
+
+.ppo-root #count {
+  position: absolute; font-size: 20vw;
+  top: -50%; left: 50%;
+  transition: all 0.1s; z-index: 2;
+}
+
+.ppo-root #result-text {
+  top: 56%; position: absolute; width: 20vw; left: 40vw;
+}
+
+.ppo-root .water {
+  background-image: url('/public/PPO/assets/water028.gif');
+}
+
+/* ── Title / Intro ── */
+.ppo-root #dogpile {
+  height: 200vh; z-index: 0; position: absolute;
+}
+
+.ppo-root #intro {
+  background-image: url('/public/PPO/assets/flames3.gif');
+  height: 100vh; width: 100vw;
+  overflow: hidden; position: fixed;
+}
+
+.ppo-root #start { z-index: 1; }
+
+.ppo-root #title {
+  position: absolute; font-size: 20vw; text-align: center;
+}
+
+.ppo-root .fight {
+  font-family: fight; font-weight: bolder;
+  color: orange;
+  text-shadow: white 2px 2px, black 4px 4px;
+  z-index: 1;
+}
+
+/* ── Bar ── */
+.ppo-root #bar {
+  position: fixed; top: 0%; width: 100vw; height: 5vh;
+  display: inline-flex; background-color: pink;
+}
+
+.ppo-root #bar #balance { display: inline-flex; }
+.ppo-root #bar div h3 { margin-left: 5%; }
+.ppo-root #wallet { color: green; margin-top: 2vh; width: 50vw; }
+.ppo-root #cash-out { margin-left: auto; }
+.ppo-root #close-settings { margin-left: auto; display: none; }
+
+/* ── Wait ── */
+.ppo-root #wait { background-image: url('/public/PPO/assets/code.gif'); }
+
+/* ── Banner ── */
+.ppo-root #banner {
+  position: absolute; top: -100px; left: 50%;
+  transform: translateX(-50%); transition: all 0.1s;
+  width: 100vw; height: 30vh;
+  background-color: black;
+  background-image: url('/public/PPO/assets/flames3.gif');
+  display: flex;
+}
+
+.ppo-root #banner-min { height: 10%; }
+.ppo-root #next { height: 100%; width: 30vw; margin-left: auto; }
+
+/* ── Settings ── */
+.ppo-root #settings {
+  position: absolute; right: 0%; top: 5%; z-index: 4;
+  background-color: lightcyan; height: 95%;
+}
+
+.ppo-root .settings-option { font-size: 200%; }
+.ppo-root .settings-button { font-size: 200%; margin-left: auto; }
+.ppo-root .settings-button:hover { cursor: pointer; }
+
+/* ── Boot ── */
+.ppo-root #boot {
+  background-color: white; height: 101%; width: 101%;
+  left: -0.5%; top: -0.5%;
+}
+
+.ppo-root #boot #logo img {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px; opacity: 0;
+}
+
+/* ── Teams / Leaderboard ── */
+.ppo-root #leaderboard { display: block; margin-top: 30%; text-align: center; }
+.ppo-root #bio { margin: 10%; margin-top: 30%; display: block; }
+.ppo-root #team { display: block; margin: 10%; margin-top: 30vh; }
+
+.ppo-root .teamMember {
+  display: inline-flex; width: 97%; height: 10%;
+  border-width: thick; border-color: black; border-style: double;
+}
+
+.ppo-root .teamMember p { margin-left: 5%; margin-right: 2%; }
+.ppo-root .right { text-align: right; }
+
+/* ── Popup ── */
+.ppo-root .pop {
+  position: absolute; z-index: 3;
+  width: 80vw; height: 80vh; top: 10vh; left: 10vw;
+  background-image: url('/public/PPO/assets/bg.gif');
+  overflow-y: scroll;
+}
+
+.ppo-root .pack-choice { width: 25vw; }
+.ppo-root #pack-list { margin-top: 8vh; }
+.ppo-root #close { font-size: 7vh; margin: 1%; position: absolute; background-color: white; }
+
+/* ── Page Select ── */
+.ppo-root #page-sel {
+  position: absolute; left: 0%; top: 30%;
+  height: 100px; background-color: pink;
+  padding: 1%; z-index: 4;
+}
+
+/* ── Info ── */
+.ppo-root #info {
+  display: block; margin-top: 30%; margin-left: 30%; margin-right: 30%;
+  text-align: center; overflow-y: scroll;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .ppo-root .container { flex-direction: column; }
+  .ppo-root .grid { grid-template-columns: repeat(3, 1fr); }
+  .ppo-root .draggable { width: 50px; height: 50px; }
+  .ppo-root .dragging { width: 60px; height: 60px; }
+  .ppo-root .stage { height: 60px; width: 100px; }
+  .ppo-root .card { height: 300px; width: 200px; }
+  .ppo-root .pp { height: 100px; width: 100px; top: 10%; left: -5%; }
+  .ppo-root #player1, .ppo-root #player2 { top: 45%; }
+  .ppo-root #chosen { left: -25%; }
+}
+
+/* ── Desktop ── */
+@media (min-width: 769px) {
+  .ppo-root .grid { grid-template-columns: repeat(4, 1fr); }
+  .ppo-root .draggable { width: 70px; height: 70px; }
+  .ppo-root .dragging { width: 75px; height: 75px; }
+  .ppo-root .stage { height: 90%; width: 90%; }
+  .ppo-root .card { height: 40%; width: 300px; }
+  .ppo-root .pp { height: 200px; width: 200px; top: 10%; }
+  .ppo-root #player1, .ppo-root #player2 { top: 45%; }
+  .ppo-root #chosen { left: -5%; }
+}
+
+/* ══════════════════════════════
+   Animations (from anime.css)
+   ══════════════════════════════ */
+
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes knockOffRight {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); }
+  100% { transform: translateY(-100vh) translateX(100vw) rotate(45deg); }
+}
+
+@keyframes knockOffLeft {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); }
+  100% { transform: translateY(-100vh) translateX(-100vw) rotate(-45deg); }
+}
+
+@keyframes smashRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translate(30vw); }
+}
+
+@keyframes smashLeft {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translate(-30vw); }
+}
+
+@keyframes spawnSlideIn {
+  0% { top: -30%; }
+  100% { top: 45%; }
+}
+
+.ppo-root .spawn-slide { animation: spawnSlideIn 1s ease forwards; }
+.ppo-root .smashR { animation: smashRight .2s; }
+.ppo-root .smashL { animation: smashLeft .2s; }
+.ppo-root .knock-off-right { animation: knockOffRight 1s ease-in-out forwards; }
+.ppo-root .knock-off-left { animation: knockOffLeft 1s ease-in-out forwards; }
+.ppo-root .fade-in-out { animation: fadeIn 1s ease-in-out; }
+.ppo-root .float { animation: float 3s ease-in-out infinite; }
+.ppo-root .bounce:hover { animation: bounce 0.4s ease-in-out; }

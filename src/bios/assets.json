@@ -1,0 +1,84 @@
+[
+  {
+    "id": "miladystation",
+    "name": "MiladyStation",
+    "standard": "ERC-721",
+    "address": "0xB24BaB1732D34cAD0A7C7035C3539aEC553bF3a0",
+    "chain": "mainnet",
+    "image": "public/main/miladystation.avif",
+    "opensea": "https://opensea.io/collection/miladystation",
+    "query": {
+      "balance": "balanceOf(address) view returns (uint256)",
+      "enumerate": "tokenOfOwnerIn(address,uint256,uint256) view returns (uint256[])",
+      "metadata": "tokenURI(uint256) view returns (string)"
+    }
+  },
+  {
+    "id": "cigstation",
+    "name": "Cigstation",
+    "standard": "ERC-721",
+    "address": "0x2739144641160c170DA047Db1f7b52712081424c",
+    "chain": "mainnet",
+    "image": "public/main/cigstation.avif",
+    "opensea": "https://opensea.io/collection/cigstation",
+    "query": {
+      "balance": "balanceOf(address) view returns (uint256)",
+      "enumerate": "tokenOfOwnerIn(address,uint256,uint256) view returns (uint256[])",
+      "metadata": "tokenURI(uint256) view returns (string)"
+    }
+  },
+  {
+    "id": "tubbystation",
+    "name": "Tubbystation",
+    "standard": "ERC-721",
+    "address": "0x8Dddc7710A40e138d0b6b637e84114494280d69f",
+    "chain": "mainnet",
+    "image": "public/main/tubbystation.avif",
+    "opensea": "https://opensea.io/collection/tubbystation",
+    "query": {
+      "balance": "balanceOf(address) view returns (uint256)",
+      "enumerate": "tokenOfOwnerIn(address,uint256,uint256) view returns (uint256[])",
+      "metadata": "tokenURI(uint256) view returns (string)"
+    }
+  },
+  {
+    "id": "missingno",
+    "name": "MissingNo",
+    "standard": "ERC-1155",
+    "address": "0x3B87A4c1134Abd9Bb0908CBdE11737DCc517Ef84",
+    "chain": "mainnet",
+    "image": "public/main/missingno.avif",
+    "opensea": "https://opensea.io/collection/mony-missingno",
+    "tokenIdMax": 123,
+    "query": {
+      "balance": "balanceOfBatch(address[],uint256[]) view returns (uint256[])",
+      "metadata": "uri(uint256) view returns (string)"
+    }
+  },
+  {
+    "id": "cultexecutives",
+    "name": "Cult Executives",
+    "standard": "ERC-404",
+    "address": "0x185485bF2e26e0Da48149aee0A8032c8c2060Db2",
+    "chain": "mainnet",
+    "image": "public/main/cultexecutives.avif",
+    "opensea": "https://opensea.io/collection/cult-executives",
+    "query": {
+      "balance": "balanceOf(address) view returns (uint256)",
+      "enumerate": "getOwnerTokens(address) view returns (uint256[])",
+      "metadata": "tokenURI(uint256) view returns (string)"
+    }
+  },
+  {
+    "id": "ms2",
+    "name": "MS2",
+    "standard": "ERC-20",
+    "address": "0x98ed411b8cf8536657c660db8aa55d9d4baaf820",
+    "chain": "mainnet",
+    "image": "public/main/ms2.jpg",
+    "decimals": 6,
+    "query": {
+      "balance": "balanceOf(address) view returns (uint256)"
+    }
+  }
+]

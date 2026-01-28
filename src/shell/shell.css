@@ -1,0 +1,784 @@
+/* ══════════════════════════════════════
+   MiladyStation One — Shell CSS
+   ══════════════════════════════════════ */
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+#app {
+  height: 100vh;
+  width: 100vw;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 0.5em 1.5em;
+  font-size: 1.2em;
+  font-family: inherit;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Intro Animation ── */
+.intro-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.intro-container #top-title {
+  font-size: 9vh;
+  margin: 0;
+  opacity: 0;
+}
+
+.intro-container #mony-logo {
+  width: 25vw;
+  min-width: 120px;
+  display: block;
+  opacity: 0;
+}
+
+.intro-container #bottom-title {
+  font-size: 4vh;
+  margin: 0;
+  opacity: 0;
+}
+
+.intro-container #ms-logo {
+  width: 50vw;
+  min-width: 200px;
+  display: block;
+  opacity: 0;
+}
+
+/* ── Overlay Controls (shared: intro, eject, bios back) ── */
+.overlay-controls,
+.intro-controls {
+  position: fixed;
+  bottom: 1.5em;
+  left: 1.5em;
+  display: flex;
+  gap: 0.5em;
+  z-index: 10;
+}
+
+.overlay-controls button,
+.intro-controls button {
+  font-size: 0.9em;
+  padding: 0.4em 1em;
+  opacity: 0.6;
+}
+
+.overlay-controls button:hover,
+.intro-controls button:hover {
+  opacity: 1;
+}
+
+/* ── BIOS Home ── */
+.bios-home {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.bios-options {
+  display: flex;
+  gap: 3em;
+}
+
+@media (max-width: 600px) {
+  .bios-options {
+    flex-direction: column;
+  }
+}
+
+.bios-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  border: none;
+}
+
+.bios-label {
+  font-weight: bold;
+  padding: 0.6em 2em;
+  border: 2px solid white;
+}
+
+.bios-icon {
+  font-size: 3em;
+  line-height: 1;
+}
+
+/* ── BIOS CD Menu ── */
+.bios-cd-menu {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8vh;
+}
+
+.bios-heading {
+  margin: 0 0 1.5em;
+}
+
+.disc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 90%;
+  max-width: 500px;
+}
+
+.disc-item {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  text-align: left;
+  padding: 0.6em 1em;
+}
+
+.disc-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* ── CD Menu Folders ── */
+.disc-folder {
+  font-size: 1.1em;
+}
+
+.disc-folder-icon {
+  font-size: 1.2em;
+  width: 40px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.disc-folder-heading {
+  text-align: center;
+  margin: 0 0 1em;
+  font-size: 0.9em;
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.disc-item--stub {
+  opacity: 0.5;
+}
+
+.disc-stub-badge {
+  margin-left: auto;
+  font-size: 0.7em;
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Disc Stub (Coming Soon placeholder) ── */
+.disc-stub {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.disc-stub__label {
+  font-size: 1.2em;
+  opacity: 0.4;
+  margin: 0 0 0.5em;
+}
+
+.disc-stub__hint {
+  font-size: 0.9em;
+  opacity: 0.3;
+  margin: 0;
+}
+
+/* ── BIOS Memory Card ── */
+.bios-memory-card {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.bios-memory-card--connected {
+  justify-content: flex-start;
+  padding: 2em 1em 6em;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.memory-card-top {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.memory-card-refresh:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.memory-card-wrong-network {
+  margin: 2em 0;
+  text-align: center;
+}
+
+.memory-card-wrong-network p {
+  margin-bottom: 1em;
+  color: #ffcc00;
+}
+
+.memory-card-switch-network {
+  font-size: 0.9em;
+  padding: 0.5em 1.2em;
+  color: #ffcc00;
+  border: 1px solid #ffcc00;
+  background: transparent;
+  cursor: pointer;
+}
+
+.memory-card-switch-network:hover {
+  background: #ffcc00;
+  color: #000;
+}
+
+.memory-card-content {
+  margin: 2em 0;
+}
+
+/* ── Collection Grid ── */
+.memory-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  width: 100%;
+  max-width: 700px;
+}
+
+@media (max-width: 600px) {
+  .memory-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Collection Card ── */
+.collection-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.75em;
+  padding: 1em;
+  text-align: left;
+}
+
+.collection-card--linked {
+  cursor: pointer;
+}
+
+.collection-card--linked:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.collection-card--empty {
+  opacity: 0.4;
+}
+
+.collection-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-bottom: 0.75em;
+}
+
+.collection-card__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.collection-card__name {
+  font-weight: 600;
+  font-size: 0.95em;
+  flex: 1;
+}
+
+.collection-card__badge {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 0.15em 0.6em;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.collection-card__loading {
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+}
+
+.collection-card__loading .wallet-spinner {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+}
+
+.collection-card__error {
+  color: #f87171;
+  font-size: 0.85em;
+  margin: 0.5em 0;
+}
+
+.collection-card__erc20-balance {
+  text-align: center;
+  padding: 0.75em 0;
+}
+
+.collection-card__erc20-value {
+  font-size: 1.5em;
+  font-weight: 700;
+  display: block;
+}
+
+.collection-card__erc20-symbol {
+  font-size: 0.8em;
+  opacity: 0.5;
+}
+
+.collection-card__gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+}
+
+.collection-card__thumb {
+  width: 60px;
+  height: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.collection-card__thumb:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.collection-card__thumb-img {
+  width: 100%;
+  height: 100%;
+}
+
+.collection-card__thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+  opacity: 0.5;
+}
+
+.collection-card__empty {
+  margin: 0.5em 0 0;
+  font-size: 0.85em;
+  opacity: 0.5;
+}
+
+/* ── Token Modal ── */
+.token-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.token-modal {
+  width: min(400px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.token-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.token-modal__header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.token-modal__close {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.token-modal__close:hover {
+  color: white;
+}
+
+.token-modal__image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 1rem;
+}
+
+.token-modal__img {
+  width: 100%;
+  height: 100%;
+}
+
+.token-modal__img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  opacity: 0.3;
+}
+
+.token-modal__info {
+  margin-bottom: 1rem;
+}
+
+.token-modal__info p {
+  margin: 0.25em 0;
+}
+
+.token-modal__collection {
+  opacity: 0.5;
+  font-size: 0.9em;
+}
+
+.token-modal__id {
+  font-size: 0.85em;
+  opacity: 0.4;
+}
+
+.token-modal__quantity {
+  font-weight: 600;
+  color: #12b886;
+}
+
+.token-modal__traits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em;
+  margin-bottom: 1rem;
+}
+
+.token-modal__trait {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.token-modal__trait-type {
+  display: block;
+  font-size: 0.7em;
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.token-modal__trait-value {
+  display: block;
+  font-size: 0.85em;
+  font-weight: 600;
+  margin-top: 0.2em;
+}
+
+.token-modal__link {
+  display: block;
+  text-align: center;
+  color: white;
+  opacity: 0.6;
+  font-size: 0.85em;
+  padding: 0.5em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5em;
+  text-decoration: none;
+}
+
+.token-modal__link:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ── Disc Runtime (running app wrapper) ── */
+.disc-runtime {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* ── Shell error fallback ── */
+.shell-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: red;
+  font-size: 2em;
+}
+
+/* ── Wallet Button (micro-web3) ── */
+.floating-wallet-button {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.floating-wallet-button .wallet-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  color: white;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.floating-wallet-button .wallet-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.floating-wallet-button.connected .wallet-btn {
+  border-color: #12b886;
+}
+
+.wallet-mark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  display: inline-block;
+}
+
+.wallet-mark--connected {
+  background: #12b886;
+  box-shadow: 0 0 0 4px rgba(18, 184, 134, 0.25);
+}
+
+.wallet-disconnect {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-left: 0.5rem;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.wallet-disconnect:hover {
+  color: white;
+}
+
+.wallet-info-panel {
+  margin-top: 0.75rem;
+  width: 280px;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.floating-wallet-button.menu-open .wallet-info-panel {
+  display: block;
+}
+
+.wallet-info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  color: white;
+}
+
+.wallet-info-label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.wallet-info-value {
+  font-weight: 600;
+}
+
+.wallet-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: wallet-spin 0.8s linear infinite;
+}
+
+@keyframes wallet-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Wallet Modal ── */
+.wallet-modal-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+}
+
+.wallet-modal {
+  width: min(380px, 92vw);
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+.wallet-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.wallet-modal-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: white;
+}
+
+.wallet-modal-close {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.wallet-modal-close:hover {
+  color: white;
+}
+
+.wallet-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wallet-option {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.85rem;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.wallet-option:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.wallet-option img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
