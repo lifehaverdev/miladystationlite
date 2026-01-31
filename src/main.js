@@ -21,8 +21,7 @@ if (USE_FORK) {
 export { USE_FORK, FORK_RPC_URL, FORK_CHAIN_ID };
 
 async function main() {
-  // Set a working IPFS gateway (cloudflare-ipfs.com is dead)
-  IpfsService.setCustomGateway('https://ipfs.io/ipfs/');
+  // IpfsService now handles gateway rotation automatically
 
   const walletService = new WalletService(eventBus);
 

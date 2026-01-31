@@ -8,6 +8,7 @@ import {
   GAS_ESTIMATE_PER_PLAYER,
   SLIDE_STATUS
 } from './constants.js';
+import { IpfsService } from '@monygroupcorp/micro-web3';
 
 // Fork mode detection
 const USE_FORK = import.meta.env.VITE_USE_FORK === 'true';
@@ -164,12 +165,12 @@ class SlideService {
   async getNononMetadata(tokenId) {
     try {
       const uri = await this.nononContract.tokenURI(tokenId);
-      // Handle IPFS URIs
-      const url = uri.replace('ipfs://', 'https://ipfs.io/ipfs/');
+      const url = IpfsService.resolveUrl(uri);
       const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.json();
     } catch (e) {
-      console.warn(`Failed to fetch metadata for token ${tokenId}:`, e);
+      console.warn(`Failed to fetch metadata for token ${tokenId}:`, e.message);
       return null;
     }
   }

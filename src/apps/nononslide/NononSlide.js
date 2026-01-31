@@ -1,5 +1,5 @@
 import { Component, h } from '@monygroupcorp/microact';
-import { WalletButton } from '@monygroupcorp/micro-web3';
+import { WalletButton, IpfsService } from '@monygroupcorp/micro-web3';
 import SlideService from './SlideService.js';
 import { SLIDE_STATUS, SLIDE_STATUS_LABELS, CIRCLE_LAYOUT_MAX } from './constants.js';
 
@@ -30,7 +30,12 @@ class NononSlide extends Component {
       // Join flow
       selectedNononForJoin: null,
       isApproved: false,
-      depositAmount: null
+      depositAmount: null,
+      // Refunds
+      refundAmount: null,
+      creatorPenalties: null,
+      // Collection info
+      collectionDescription: null
     };
 
     this.slideService = new SlideService();
@@ -102,19 +107,31 @@ class NononSlide extends Component {
   }
 
   async loadNononImages(tokenIds) {
+    const imagesMap = {};
+    let description = null;
+
     for (const tokenId of tokenIds) {
       try {
         const metadata = await this.slideService.getNononMetadata(tokenId);
         if (metadata && metadata.image) {
-          const imageUrl = metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/');
-          this.setState(prev => ({
-            nononImages: { ...prev.nononImages, [tokenId]: imageUrl }
-          }));
+          imagesMap[tokenId] = IpfsService.resolveUrl(metadata.image);
+        }
+        // Capture collection description from first successful metadata
+        if (!description && metadata && metadata.description) {
+          description = metadata.description;
         }
       } catch (e) {
-        console.warn(`Failed to load image for Nonon #${tokenId}`);
+        // Skip failed images silently
       }
     }
+
+    const newState = {
+      nononImages: { ...this.state.nononImages, ...imagesMap }
+    };
+    if (description && !this.state.collectionDescription) {
+      newState.collectionDescription = description;
+    }
+    this.setState(newState);
   }
 
   async loadNononPointsInfo(address, tokenIds) {
@@ -185,7 +202,12 @@ class NononSlide extends Component {
   }
 
   async selectSlide(slide) {
-    this.setState({ selectedSlide: slide, view: 'detail' });
+    this.setState({
+      selectedSlide: slide,
+      view: 'detail',
+      refundAmount: null,
+      creatorPenalties: null
+    });
     // Load images and points info for participants
     this.loadNononImages(slide.tokenIds);
     this.loadSlideParticipantsPointsInfo(slide.players, slide.tokenIds);
@@ -198,6 +220,28 @@ class NononSlide extends Component {
       } catch (e) {
         console.warn('Failed to calculate deposit:', e);
       }
+    }
+    // Load refund amounts for Closed/Cancelled slides
+    if (slide.status === SLIDE_STATUS.Closed || slide.status === SLIDE_STATUS.Cancelled) {
+      this.loadRefundAmounts(slide.id);
+    }
+  }
+
+  async loadRefundAmounts(slideId) {
+    const { address } = this.state;
+    const { ethers } = await import('ethers');
+
+    try {
+      // Check user's refund amount
+      if (address) {
+        const refund = await this.slideService.getRefundAmount(slideId, address);
+        this.setState({ refundAmount: ethers.utils.formatEther(refund) });
+      }
+      // Check creator penalties
+      const penalties = await this.slideService.getCreatorPenalties(slideId);
+      this.setState({ creatorPenalties: ethers.utils.formatEther(penalties) });
+    } catch (e) {
+      console.warn('Failed to load refund amounts:', e);
     }
   }
 
@@ -267,7 +311,7 @@ class NononSlide extends Component {
     this.setState({ txPending: true, error: null });
     try {
       await this.slideService.claimRefund(selectedSlide.id);
-      this.setState({ txPending: false });
+      this.setState({ txPending: false, refundAmount: '0' });
     } catch (e) {
       this.setState({ error: e.message, txPending: false });
     }
@@ -278,7 +322,7 @@ class NononSlide extends Component {
     this.setState({ txPending: true, error: null });
     try {
       await this.slideService.claimCreatorPenalties(selectedSlide.id);
-      this.setState({ txPending: false });
+      this.setState({ txPending: false, creatorPenalties: '0' });
     } catch (e) {
       this.setState({ error: e.message, txPending: false });
     }
@@ -360,6 +404,92 @@ class NononSlide extends Component {
     );
   }
 
+  renderNononHouseSection() {
+    const { collectionDescription } = this.state;
+
+    return h('div', { className: 'nonon-house-section' },
+      h('div', { className: 'nonon-house-content' },
+        h('h2', null, 'About Nonon'),
+        h('p', { className: 'nonon-house-description' },
+          collectionDescription || 'nonon is a 5,000 piece collection of vibrant hand-painted characters by the artist known as three; an experiment in living blockchain art featuring a 100% on-chain dynamic soulbound token that acts as both your pass to a one of a kind on chain collectathon and a key to unlocking new friendships.'
+        ),
+        h('div', { className: 'nonon-house-links' },
+          h('a', {
+            href: 'https://nonon.house/',
+            target: '_blank',
+            rel: 'noreferrer',
+            className: 'nonon-house-link'
+          }, 'nonon.house'),
+          h('a', {
+            href: 'https://x.com/nonon_house',
+            target: '_blank',
+            rel: 'noreferrer',
+            className: 'nonon-house-link'
+          }, '@nonon_house')
+        )
+      )
+    );
+  }
+
+  renderInfoSection() {
+    const contractUrl = 'https://etherscan.io/address/0xeddC891e17471071A7a5F9aa10178C57fAc6F352';
+
+    return h('div', { className: 'nonon-info-section' },
+      h('div', { className: 'nonon-info-overview' },
+        h('h2', null, 'What is Nonon Slide?'),
+        h('p', null,
+          'Nonon Slide is a social game for Nonon holders. Players join a slide with their Nonon, ' +
+          'and when the slide executes, everyone\'s Nonon gets sent to the next player in the circle. ' +
+          'It\'s a fun way to trade Nonons with friends and earn Friend Card points!'
+        ),
+        h('a', {
+          href: contractUrl,
+          target: '_blank',
+          rel: 'noreferrer',
+          className: 'nonon-contract-link'
+        }, 'View Contract on Etherscan')
+      ),
+      h('div', { className: 'nonon-faq' },
+        h('h3', null, 'FAQ'),
+        h('div', { className: 'nonon-faq-item' },
+          h('h4', null, 'Are my NFTs safe?'),
+          h('p', null,
+            'Yes! The contract is designed to only transfer NFTs to the next position in a slide, ' +
+            'and it is always a complete loop. Everyone in a slide will always receive a Nonon ' +
+            'for every one they send. The contract is fully on-chain and trustless.'
+          )
+        ),
+        h('div', { className: 'nonon-faq-item' },
+          h('h4', null, 'Do I still get Friend Card points?'),
+          h('p', null,
+            'Yes! This is why you don\'t send your Nonon to the contract directly. Instead, you ' +
+            'approve the contract to transfer NFTs from your wallet. When the slide executes, ' +
+            'transfers happen wallet-to-wallet, triggering Friend Card points. Look for the "+1" ' +
+            'badge on Nonons that haven\'t been sent yet.'
+          )
+        ),
+        h('div', { className: 'nonon-faq-item' },
+          h('h4', null, 'Why do I have to deposit ETH?'),
+          h('p', null,
+            'The deposit covers gas fees for executing the slide. When the slide runs, it transfers ' +
+            'multiple NFTs in one transaction. Any unused ETH is refunded. This ensures slides can ' +
+            'always execute without someone having to pay for everyone.'
+          )
+        )
+      )
+    );
+  }
+
+  renderDisclaimer() {
+    return h('div', { className: 'nonon-disclaimer' },
+      h('p', null,
+        'Nonon Slide is an independent fan project by Mony Group Corp. We are not affiliated with, ' +
+        'endorsed by, or officially connected to Nonon House or the N.I.I.T. syndicate. ' +
+        'We just think they\'re great and built this for fun. All Nonon IP belongs to its respective creators.'
+      )
+    );
+  }
+
   renderBrowseView() {
     const { slides, loading, connected } = this.state;
 
@@ -390,7 +520,10 @@ class NononSlide extends Component {
           : h('div', { className: 'nonon-slide-list' },
               ...slides.map(slide => this.renderSlideCard(slide))
             ),
-      this.renderOwnedNonons()
+      this.renderOwnedNonons(),
+      this.renderNononHouseSection(),
+      this.renderInfoSection(),
+      this.renderDisclaimer()
     );
   }
 
@@ -666,18 +799,23 @@ class NononSlide extends Component {
 
     // Closed/Cancelled - claim refund
     if (slide.status === SLIDE_STATUS.Closed || slide.status === SLIDE_STATUS.Cancelled) {
+      const { refundAmount, creatorPenalties } = this.state;
+      const hasRefund = refundAmount && parseFloat(refundAmount) > 0;
+      const hasPenalties = creatorPenalties && parseFloat(creatorPenalties) > 0;
+
       return h('div', { className: 'nonon-actions' },
         h('h3', { className: 'nonon-actions-title' },
           slide.status === SLIDE_STATUS.Closed ? 'Slide Complete!' : 'Slide Cancelled'
         ),
-        isInSlide && h('button', {
+        hasRefund && h('button', {
           className: 'nonon-action-btn',
           onClick: () => this.handleClaimRefund()
-        }, 'Claim Refund'),
-        isCreator && h('button', {
+        }, `Claim Refund (${refundAmount} ETH)`),
+        isCreator && hasPenalties && h('button', {
           className: 'nonon-action-btn secondary',
           onClick: () => this.handleClaimPenalties()
-        }, 'Claim Creator Penalties')
+        }, `Claim Penalties (${creatorPenalties} ETH)`),
+        !hasRefund && !hasPenalties && h('p', null, 'No refunds available')
       );
     }
 

@@ -847,3 +847,139 @@
     height: 50px;
   }
 }
+
+/* Nonon House Section */
+.nonon-house-section {
+  margin-top: 60px;
+  padding: 30px;
+  background-color: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+.nonon-house-content h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.nonon-house-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.9);
+  text-transform: none;
+  margin-bottom: 20px;
+}
+
+.nonon-house-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nonon-house-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #E88B8B;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.nonon-house-link:hover {
+  background-color: #d67a7a;
+}
+
+/* Info Section */
+.nonon-info-section {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 2px solid rgba(255,255,255,0.2);
+}
+
+.nonon-info-overview {
+  margin-bottom: 40px;
+}
+
+.nonon-info-overview h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.nonon-info-overview p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.9);
+  max-width: 700px;
+}
+
+.nonon-contract-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #E88B8B;
+  text-decoration: none;
+  font-size: 13px;
+  border-bottom: 1px solid #E88B8B;
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.nonon-contract-link:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.nonon-faq h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.nonon-faq-item {
+  margin-bottom: 25px;
+  padding: 20px;
+  background-color: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.nonon-faq-item h4 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.nonon-faq-item p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.85);
+  text-transform: none;
+}
+
+@media (max-width: 600px) {
+  .nonon-info-section {
+    margin-top: 40px;
+    padding-top: 30px;
+  }
+
+  .nonon-faq-item {
+    padding: 15px;
+  }
+}
+
+/* Disclaimer */
+.nonon-disclaimer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+
+.nonon-disclaimer p {
+  font-size: 11px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.5);
+  text-transform: none;
+  max-width: 600px;
+  margin: 0 auto;
+}
