@@ -8,21 +8,22 @@ export const MAIN_ASSETS = `${ASSET_BASE}/main`;
 export const PPO_ASSETS  = `${ASSET_BASE}/PPO`;
 export const CLASSIC_ASSETS = `${ASSET_BASE}/classic`;
 export const TUBBY_ASSETS = `${ASSET_BASE}/tubby`;
+export const NONON_ASSETS = `${ASSET_BASE}/nononslide`;
 
 /* ── CD Player: subdomain discs (shown flat at top level) ── */
 export const DISC_APPS = [
+  {
+    id: 'nononslide',
+    name: 'Nonon Slide',
+    image: `${MAIN_ASSETS}/nonon.gif`,
+    route: 'nononslide',
+    external: false
+  },
   {
     id: 'ppo',
     name: 'Power Packs Onchained',
     image: `${MAIN_ASSETS}/ppo.gif`,
     route: 'powerpacksonchained',
-    external: false
-  },
-  {
-    id: 'classic',
-    name: 'MiladyStation Classic',
-    image: `${MAIN_ASSETS}/msclassic.gif`,
-    route: 'classic',
     external: false
   },
   {
@@ -34,12 +35,11 @@ export const DISC_APPS = [
     badge: 'STILL MINTING'
   },
   {
-    id: 'nononslide',
-    name: 'Nonon Slide',
-    image: `${MAIN_ASSETS}/nonon.gif`,
-    route: 'nononslide',
-    external: false,
-    stub: true
+    id: 'classic',
+    name: 'MiladyStation Classic',
+    image: `${MAIN_ASSETS}/msclassic.gif`,
+    route: 'classic',
+    external: false
   }
 ];
 

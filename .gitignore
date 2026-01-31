@@ -1,6 +1,12 @@
 node_modules
 dist
 
+# Anvil/Fork testing
+.anvil.pid
+.anvil-cache/
+src/generated/fork-config.json
+.env.local
+
 # Dev notes & plans
 *.md
 !README.md

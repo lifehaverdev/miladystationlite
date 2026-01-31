@@ -1,0 +1,849 @@
+/* Nonon Slide — Matching nonon.house branding */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+.nononslide-page {
+  font-family: 'Space Mono', monospace;
+  background-color: #6BA3D6;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  min-height: 100vh;
+  color: #fff;
+  overflow-y: auto;
+  padding-bottom: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Navigation Bar */
+.nonon-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #5A93C6;
+  border-bottom: 2px solid rgba(255,255,255,0.2);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.nonon-bar-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.nonon-bar-back {
+  background: none;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+}
+
+.nonon-bar-back:hover {
+  background-color: #fff;
+  color: #5A93C6;
+}
+
+.nonon-connect-wrap {
+  display: flex;
+  align-items: center;
+}
+
+/* Override WalletButton for Nonon theme */
+.nonon-connect-wrap .wallet-button,
+.nonon-connect-wrap button {
+  background-color: #E88B8B !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 10px 20px !important;
+  cursor: pointer !important;
+  font-family: 'Space Mono', monospace !important;
+  text-transform: uppercase !important;
+}
+
+.nonon-connect-wrap .wallet-button:hover,
+.nonon-connect-wrap button:hover {
+  background-color: #d67a7a !important;
+}
+
+/* Main Content */
+.nonon-main {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 90px;
+}
+
+/* No Nonon Gate */
+.nonon-gate {
+  text-align: center;
+  padding: 100px 20px;
+  background-color: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.nonon-gate h2 {
+  color: #fff;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.nonon-gate p {
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 30px;
+}
+
+.nonon-gate-btn {
+  background-color: #E88B8B;
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 0;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+}
+
+.nonon-gate-btn:hover {
+  background-color: #d67a7a;
+}
+
+/* Browse View */
+.nonon-browse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(255,255,255,0.3);
+}
+
+.nonon-browse-header h1 {
+  font-size: 28px;
+  color: #fff;
+  margin: 0;
+}
+
+.nonon-browse-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.nonon-create-btn,
+.nonon-history-btn {
+  background-color: #E88B8B;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 0;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+}
+
+.nonon-history-btn {
+  background-color: transparent;
+  border: 2px solid #fff;
+}
+
+.nonon-create-btn:hover {
+  background-color: #d67a7a;
+}
+
+.nonon-history-btn:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* Slide List */
+.nonon-slide-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nonon-slide-card {
+  background-color: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 0;
+  padding: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.nonon-slide-card:hover {
+  background-color: rgba(255,255,255,0.25);
+  transform: translateX(5px);
+}
+
+.nonon-slide-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.nonon-slide-card-id {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.nonon-slide-card-status {
+  padding: 4px 12px;
+  border-radius: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  border: 2px solid;
+}
+
+.nonon-slide-card-status.open {
+  background-color: rgba(255,255,255,0.2);
+  border-color: #fff;
+  color: #fff;
+}
+
+.nonon-slide-card-status.ready {
+  background-color: #E88B8B;
+  border-color: #E88B8B;
+  color: #fff;
+}
+
+.nonon-slide-card-status.closed {
+  background-color: rgba(74, 222, 128, 0.3);
+  border-color: #4ade80;
+  color: #4ade80;
+}
+
+.nonon-slide-card.history {
+  opacity: 0.9;
+}
+
+.nonon-slide-card-info {
+  display: flex;
+  gap: 30px;
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+}
+
+.nonon-slide-card-info span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Empty State */
+.nonon-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(255,255,255,0.7);
+  background-color: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+.nonon-empty p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Owned Nonons Section */
+.nonon-owned-section {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 2px solid rgba(255,255,255,0.3);
+}
+
+.nonon-owned-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.nonon-owned-header h2 {
+  font-size: 24px;
+  color: #fff;
+  margin: 0;
+}
+
+.nonon-owned-count {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+}
+
+.nonon-owned-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.nonon-owned-item {
+  width: 120px;
+  background-color: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.3);
+  padding: 10px;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.nonon-owned-item:hover {
+  border-color: #E88B8B;
+  transform: translateY(-3px);
+}
+
+.nonon-owned-item img {
+  width: 100%;
+  display: block;
+}
+
+.nonon-owned-placeholder {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+}
+
+.nonon-owned-item {
+  position: relative;
+}
+
+.nonon-owned-item.can-earn {
+  border-color: #4ade80;
+}
+
+.nonon-owned-id {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #fff;
+}
+
+.nonon-owned-points {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.nonon-points-current {
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* +1 Point Banner */
+.nonon-point-banner {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #4ade80;
+  color: #000;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 8px;
+  z-index: 1;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.nonon-point-banner.small {
+  top: -6px;
+  right: -6px;
+  font-size: 9px;
+  padding: 2px 5px;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px #4ade80, 0 0 10px #4ade80;
+  }
+  50% {
+    box-shadow: 0 0 15px #4ade80, 0 0 25px #4ade80, 0 0 35px #4ade80;
+  }
+}
+
+/* Slide hint text */
+.nonon-slide-hint {
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* Detail View */
+.nonon-detail {
+  padding-top: 20px;
+}
+
+.nonon-detail-back {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding: 0;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+}
+
+.nonon-detail-back:hover {
+  text-decoration: underline;
+}
+
+.nonon-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(255,255,255,0.3);
+}
+
+.nonon-detail-title {
+  font-size: 32px;
+  color: #fff;
+  margin: 0 0 10px 0;
+}
+
+.nonon-detail-creator {
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+}
+
+.nonon-detail-creator a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.nonon-detail-stats {
+  display: flex;
+  gap: 15px;
+  text-align: center;
+}
+
+.nonon-detail-stat {
+  background-color: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  padding: 15px 20px;
+  min-width: 80px;
+}
+
+.nonon-detail-stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.nonon-detail-stat-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+/* Cascade Visualization - Circle */
+.nonon-cascade {
+  margin: 40px 0;
+}
+
+.nonon-cascade-title {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.nonon-cascade-circle {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.nonon-cascade-participant {
+  position: absolute;
+  width: 80px;
+  text-align: center;
+}
+
+.nonon-cascade-participant.can-earn .nonon-cascade-nft {
+  border-color: #4ade80;
+}
+
+.nonon-cascade-nft {
+  width: 60px;
+  height: 60px;
+  border-radius: 0;
+  border: 3px solid #fff;
+  background-color: rgba(255,255,255,0.2);
+  object-fit: cover;
+}
+
+.nonon-cascade-nft-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 0;
+  border: 3px solid #fff;
+  background-color: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 11px;
+}
+
+.nonon-cascade-address {
+  font-size: 9px;
+  color: rgba(255,255,255,0.8);
+  margin-top: 5px;
+  word-break: break-all;
+}
+
+/* Cascade Visualization - Linear */
+.nonon-cascade-linear {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.nonon-cascade-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  padding: 12px 15px;
+}
+
+.nonon-cascade-row.can-earn {
+  border-color: #4ade80;
+}
+
+.nonon-cascade-nft-wrap {
+  position: relative;
+}
+
+.nonon-cascade-arrow {
+  color: #E88B8B;
+  font-size: 20px;
+}
+
+.nonon-cascade-row-info {
+  flex: 1;
+}
+
+.nonon-cascade-row-address {
+  color: #fff;
+  font-size: 12px;
+}
+
+.nonon-cascade-row-token {
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+}
+
+/* Actions Panel */
+.nonon-actions {
+  background-color: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  padding: 25px;
+  margin-top: 30px;
+}
+
+.nonon-actions-title {
+  font-size: 18px;
+  color: #fff;
+  margin: 0 0 20px 0;
+}
+
+.nonon-actions p {
+  color: rgba(255,255,255,0.8);
+}
+
+.nonon-action-btn {
+  background-color: #E88B8B;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 0;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+}
+
+.nonon-action-btn:hover:not(:disabled) {
+  background-color: #d67a7a;
+}
+
+.nonon-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nonon-action-btn.secondary {
+  background-color: transparent;
+  border: 2px solid #fff;
+}
+
+.nonon-action-btn.secondary:hover:not(:disabled) {
+  background-color: #fff;
+  color: #5A93C6;
+}
+
+.nonon-action-btn.danger {
+  background-color: #c44;
+}
+
+.nonon-action-btn.danger:hover:not(:disabled) {
+  background-color: #a33;
+}
+
+/* Join Flow - Nonon Picker */
+.nonon-picker {
+  margin: 20px 0;
+}
+
+.nonon-picker-title {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.nonon-picker-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.nonon-picker-item {
+  width: 100px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  padding: 5px;
+  transition: border-color 0.2s;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.nonon-picker-item:hover {
+  border-color: rgba(255,255,255,0.5);
+}
+
+.nonon-picker-item.selected {
+  border-color: #E88B8B;
+  background-color: rgba(232,139,139,0.2);
+}
+
+.nonon-picker-item img {
+  width: 100%;
+}
+
+.nonon-picker-item {
+  position: relative;
+}
+
+.nonon-picker-item.can-earn {
+  border-color: #4ade80;
+}
+
+.nonon-picker-item-id {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.8);
+  margin-top: 5px;
+}
+
+/* Deposit Info */
+.nonon-deposit-info {
+  background-color: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+  padding: 15px;
+  margin: 20px 0;
+}
+
+.nonon-deposit-info p {
+  margin: 0;
+  color: rgba(255,255,255,0.9);
+  font-size: 14px;
+}
+
+.nonon-deposit-info .amount {
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Create Slide Modal */
+.nonon-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000000;
+}
+
+.nonon-modal {
+  background-color: #5A93C6;
+  border: 3px solid #fff;
+  padding: 30px;
+  max-width: 450px;
+  width: 90%;
+}
+
+.nonon-modal h2 {
+  color: #fff;
+  margin: 0 0 25px 0;
+  font-size: 24px;
+}
+
+.nonon-modal-field {
+  margin-bottom: 20px;
+}
+
+.nonon-modal-field label {
+  display: block;
+  color: rgba(255,255,255,0.9);
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.nonon-modal-field input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 0;
+  background-color: rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 16px;
+  box-sizing: border-box;
+  font-family: 'Space Mono', monospace;
+}
+
+.nonon-modal-field input:focus {
+  outline: none;
+  border-color: #fff;
+  background-color: rgba(255,255,255,0.2);
+}
+
+.nonon-modal-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.9);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.nonon-modal-checkbox input {
+  width: auto;
+}
+
+.nonon-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+/* Error/Success Messages */
+.nonon-error {
+  background-color: rgba(200, 50, 50, 0.3);
+  border: 2px solid #c44;
+  color: #fff;
+  padding: 12px 16px;
+  margin: 15px 0;
+}
+
+.nonon-success {
+  background-color: rgba(50, 200, 100, 0.3);
+  border: 2px solid #4c8;
+  color: #fff;
+  padding: 12px 16px;
+  margin: 15px 0;
+}
+
+/* Loading */
+.nonon-loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(255,255,255,0.8);
+}
+
+/* Transaction Pending Overlay */
+.nonon-tx-pending {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000001;
+  color: #fff;
+}
+
+.nonon-tx-pending p {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nonon-browse-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .nonon-detail-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .nonon-detail-stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nonon-cascade-circle {
+    width: 300px;
+    height: 300px;
+  }
+
+  .nonon-cascade-participant {
+    width: 60px;
+  }
+
+  .nonon-cascade-nft,
+  .nonon-cascade-nft-placeholder {
+    width: 50px;
+    height: 50px;
+  }
+}

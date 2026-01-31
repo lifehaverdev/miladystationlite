@@ -9,6 +9,7 @@ import DiscStub from '../bios/DiscStub.js';
 import Classic from '../apps/classic/Classic.js';
 import PPO from '../apps/ppo/PPO.js';
 import Tubbystation from '../apps/tubbystation/Tubbystation.js';
+import NononSlide from '../apps/nononslide/NononSlide.js';
 
 /* ── Route mapping built from APPS config ── */
 const ROUTE_TO_VIEW = {};
@@ -25,7 +26,7 @@ const APP_COMPONENTS = {
   classic: Classic,
   ppo: PPO,
   tubbystation: Tubbystation,
-  nononslide: DiscStub
+  nononslide: NononSlide
 };
 
 function getBasePath() {
