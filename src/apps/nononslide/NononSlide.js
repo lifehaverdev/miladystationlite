@@ -257,6 +257,16 @@ class NononSlide extends Component {
     }
   }
 
+  async handleRevokeApproval() {
+    this.setState({ txPending: true, error: null });
+    try {
+      await this.slideService.revokeApprovalForSlide();
+      this.setState({ isApproved: false, txPending: false });
+    } catch (e) {
+      this.setState({ error: e.message, txPending: false });
+    }
+  }
+
   async handleJoin() {
     const { selectedSlide, selectedNononForJoin } = this.state;
     if (!selectedNononForJoin) {
@@ -474,6 +484,25 @@ class NononSlide extends Component {
             'The deposit covers gas fees for executing the slide. When the slide runs, it transfers ' +
             'multiple NFTs in one transaction. Any unused ETH is refunded. This ensures slides can ' +
             'always execute without someone having to pay for everyone.'
+          )
+        ),
+        h('div', { className: 'nonon-faq-item' },
+          h('h4', null, 'Can I revoke approval after sliding?'),
+          h('p', null,
+            'Yes! For good security hygiene, you can revoke the contract\'s approval after you\'re done sliding. ' +
+            'You\'ll need to approve again next time you want to join a slide.'
+          ),
+          this.state.connected && h('div', { className: 'nonon-approval-status' },
+            h('p', { className: `nonon-approval-indicator ${this.state.isApproved ? 'approved' : 'not-approved'}` },
+              this.state.isApproved
+                ? 'Your wallet has approved the Slide contract to transfer your Nonons.'
+                : 'Your wallet has NOT approved the Slide contract.'
+            ),
+            this.state.isApproved && h('button', {
+              className: 'nonon-action-btn secondary',
+              onClick: () => this.handleRevokeApproval(),
+              disabled: this.state.txPending
+            }, this.state.txPending ? 'Revoking...' : 'Revoke Approval')
           )
         )
       )

@@ -218,6 +218,13 @@ class SlideService {
     return await tx.wait();
   }
 
+  async revokeApprovalForSlide() {
+    const signer = await this.getSigner();
+    const contract = this.nononContract.connect(signer);
+    const tx = await contract.setApprovalForAll(NONON_SLIDE_ADDRESS, false);
+    return await tx.wait();
+  }
+
   async createSlide(minPlayers, maxPlayers, creatorOnlyExecute) {
     const signer = await this.getSigner();
     const contract = this.slideContract.connect(signer);

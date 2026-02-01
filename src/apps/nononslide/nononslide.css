@@ -956,6 +956,30 @@
   text-transform: none;
 }
 
+/* Approval Status in FAQ */
+.nonon-approval-status {
+  margin-top: 15px;
+}
+
+.nonon-approval-indicator {
+  font-size: 12px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border: 2px solid;
+}
+
+.nonon-approval-indicator.approved {
+  background-color: rgba(232, 139, 139, 0.2);
+  border-color: #E88B8B;
+  color: #fff;
+}
+
+.nonon-approval-indicator.not-approved {
+  background-color: rgba(74, 222, 128, 0.15);
+  border-color: #4ade80;
+  color: #4ade80;
+}
+
 @media (max-width: 600px) {
   .nonon-info-section {
     margin-top: 40px;
