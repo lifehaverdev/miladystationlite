@@ -35,7 +35,11 @@ class NononSlide extends Component {
       refundAmount: null,
       creatorPenalties: null,
       // Collection info
-      collectionDescription: null
+      collectionDescription: null,
+      // Track which nonons are committed to active slides
+      committedNonons: {}, // tokenId -> { slideId }
+      // Track ownership issues in selected slide
+      ownershipIssues: {} // tokenId -> { expected, actual }
     };
 
     this.slideService = new SlideService();
@@ -88,6 +92,8 @@ class NononSlide extends Component {
         // Load images and points info for owned nonons
         this.loadNononImages(ownedNonons);
         this.loadNononPointsInfo(address, ownedNonons);
+        // Check which nonons are committed to active slides
+        this.buildCommittedNononsMap();
       } else {
         this.setState({ hasNonon: false, view: 'gate', loadingNonons: false });
       }
@@ -184,10 +190,51 @@ class NononSlide extends Component {
     try {
       const slides = await this.slideService.getActiveSlides();
       this.setState({ slides, loading: false });
+      this.buildCommittedNononsMap();
     } catch (e) {
       this.setState({ error: 'Failed to load slides', loading: false });
       console.error(e);
     }
+  }
+
+  async buildCommittedNononsMap() {
+    const { ownedNonons } = this.state;
+    if (!ownedNonons.length) return;
+
+    const committed = {};
+
+    for (const tokenId of ownedNonons) {
+      try {
+        const result = await this.slideService.isTokenCommitted(tokenId);
+        if (result.committed) {
+          committed[tokenId] = { slideId: result.slideId };
+        }
+      } catch (e) {
+        console.warn(`Failed to check commitment for token #${tokenId}:`, e);
+      }
+    }
+
+    this.setState({ committedNonons: committed });
+  }
+
+  async checkSlideOwnership(slide) {
+    this.setState({ ownershipIssues: {} });
+    const issues = {};
+
+    for (let i = 0; i < slide.players.length; i++) {
+      const expectedOwner = slide.players[i];
+      const tokenId = slide.tokenIds[i];
+      try {
+        const actualOwner = await this.slideService.getTokenOwner(tokenId);
+        if (actualOwner.toLowerCase() !== expectedOwner.toLowerCase()) {
+          issues[tokenId] = { expected: expectedOwner, actual: actualOwner };
+        }
+      } catch (e) {
+        console.warn(`Failed to check owner for token #${tokenId}:`, e);
+      }
+    }
+
+    this.setState({ ownershipIssues: issues });
   }
 
   async loadHistory() {
@@ -206,11 +253,16 @@ class NononSlide extends Component {
       selectedSlide: slide,
       view: 'detail',
       refundAmount: null,
-      creatorPenalties: null
+      creatorPenalties: null,
+      ownershipIssues: {}
     });
     // Load images and points info for participants
     this.loadNononImages(slide.tokenIds);
     this.loadSlideParticipantsPointsInfo(slide.players, slide.tokenIds);
+    // Check ownership for active slides
+    if (slide.status === SLIDE_STATUS.Open || slide.status === SLIDE_STATUS.Ready) {
+      this.checkSlideOwnership(slide);
+    }
     // Calculate deposit if Open
     if (slide.status === SLIDE_STATUS.Open) {
       try {
@@ -442,7 +494,7 @@ class NononSlide extends Component {
   }
 
   renderInfoSection() {
-    const contractUrl = 'https://etherscan.io/address/0xeddC891e17471071A7a5F9aa10178C57fAc6F352';
+    const contractUrl = 'https://etherscan.io/address/0x3ef469DDE7BE00F67589F0D3ffDD6C71Db7a60FD';
 
     return h('div', { className: 'nonon-info-section' },
       h('div', { className: 'nonon-info-overview' },
@@ -557,7 +609,7 @@ class NononSlide extends Component {
   }
 
   renderOwnedNonons() {
-    const { connected, hasNonon, ownedNonons, nononImages, nononPointsInfo, loadingNonons } = this.state;
+    const { connected, hasNonon, ownedNonons, nononImages, nononPointsInfo, loadingNonons, committedNonons } = this.state;
 
     if (!connected) {
       return null;
@@ -586,20 +638,23 @@ class NononSlide extends Component {
         ...ownedNonons.map(tokenId => {
           const imageUrl = nononImages[tokenId];
           const pointsInfo = nononPointsInfo[tokenId];
+          const committed = committedNonons[tokenId];
 
           const canEarnPoint = pointsInfo && !pointsInfo.hasSent;
 
           return h('div', {
-            className: `nonon-owned-item ${canEarnPoint ? 'can-earn' : ''}`,
-            key: tokenId
+            className: `nonon-owned-item ${canEarnPoint ? 'can-earn' : ''} ${committed ? 'committed' : ''}`,
+            key: tokenId,
+            onClick: committed ? () => this.selectSlide(this.state.slides.find(s => s.id === committed.slideId)) : undefined
           },
-            canEarnPoint && h('div', { className: 'nonon-point-banner' }, '+1'),
+            committed && h('div', { className: 'nonon-committed-banner' }, `Slide #${committed.slideId}`),
+            canEarnPoint && !committed && h('div', { className: 'nonon-point-banner' }, '+1'),
             imageUrl
               ? h('img', { src: imageUrl, alt: `Nonon #${tokenId}` })
               : h('div', { className: 'nonon-owned-placeholder' }, `#${tokenId}`),
             h('div', { className: 'nonon-owned-id' }, `#${tokenId}`),
             h('div', { className: 'nonon-slide-hint' },
-              pointsInfo ? (pointsInfo.hasSent ? '...' : 'send me!') : ''
+              committed ? 'in slide' : (pointsInfo ? (pointsInfo.hasSent ? '...' : 'send me!') : '')
             )
           );
         })
@@ -682,6 +737,7 @@ class NononSlide extends Component {
 
   renderCascade(slide) {
     const { players, tokenIds } = slide;
+    const { ownershipIssues } = this.state;
     if (players.length === 0) {
       return h('div', { className: 'nonon-cascade' },
         h('p', { className: 'nonon-cascade-title' }, 'No participants yet')
@@ -689,9 +745,18 @@ class NononSlide extends Component {
     }
 
     const useCircle = players.length <= CIRCLE_LAYOUT_MAX;
+    const hasIssues = Object.keys(ownershipIssues).length > 0;
 
     return h('div', { className: 'nonon-cascade' },
       h('p', { className: 'nonon-cascade-title' }, 'The Cascade'),
+      hasIssues && h('div', { className: 'nonon-ownership-warning' },
+        h('p', null, 'Some participants no longer own their committed Nonon. This slide cannot execute until resolved (cancel and recreate).'),
+        ...Object.entries(ownershipIssues).map(([tokenId, info]) =>
+          h('p', { className: 'nonon-ownership-warning-detail', key: tokenId },
+            `Nonon #${tokenId}: player ${this.truncateAddress(info.expected)} no longer owns it`
+          )
+        )
+      ),
       useCircle
         ? this.renderCascadeCircle(players, tokenIds)
         : this.renderCascadeLinear(players, tokenIds)
@@ -699,7 +764,7 @@ class NononSlide extends Component {
   }
 
   renderCascadeCircle(players, tokenIds) {
-    const { nononImages, nononPointsInfo } = this.state;
+    const { nononImages, nononPointsInfo, ownershipIssues } = this.state;
     const count = players.length;
     const radius = 150;
     const centerX = 200;
@@ -714,13 +779,15 @@ class NononSlide extends Component {
         const imageUrl = nononImages[tokenId];
         const pointsInfo = nononPointsInfo[tokenId];
         const canEarnPoint = pointsInfo && !pointsInfo.hasSent;
+        const hasIssue = ownershipIssues[tokenId];
 
         return h('div', {
-          className: `nonon-cascade-participant ${canEarnPoint ? 'can-earn' : ''}`,
+          className: `nonon-cascade-participant ${canEarnPoint ? 'can-earn' : ''} ${hasIssue ? 'ownership-issue' : ''}`,
           style: { left: `${x}px`, top: `${y}px` },
           key: i
         },
-          canEarnPoint && h('div', { className: 'nonon-point-banner small' }, '+1'),
+          hasIssue && h('div', { className: 'nonon-issue-banner' }, 'NO OWNER'),
+          canEarnPoint && !hasIssue && h('div', { className: 'nonon-point-banner small' }, '+1'),
           imageUrl
             ? h('img', { className: 'nonon-cascade-nft', src: imageUrl, alt: `Nonon #${tokenId}` })
             : h('div', { className: 'nonon-cascade-nft-placeholder' }, `#${tokenId}`),
@@ -731,7 +798,7 @@ class NononSlide extends Component {
   }
 
   renderCascadeLinear(players, tokenIds) {
-    const { nononImages, nononPointsInfo } = this.state;
+    const { nononImages, nononPointsInfo, ownershipIssues } = this.state;
 
     return h('div', { className: 'nonon-cascade-linear' },
       ...players.map((player, i) => {
@@ -740,17 +807,20 @@ class NononSlide extends Component {
         const nextPlayer = players[(i + 1) % players.length];
         const pointsInfo = nononPointsInfo[tokenId];
         const canEarnPoint = pointsInfo && !pointsInfo.hasSent;
+        const hasIssue = ownershipIssues[tokenId];
 
-        return h('div', { className: `nonon-cascade-row ${canEarnPoint ? 'can-earn' : ''}`, key: i },
+        return h('div', { className: `nonon-cascade-row ${canEarnPoint ? 'can-earn' : ''} ${hasIssue ? 'ownership-issue' : ''}`, key: i },
           h('div', { className: 'nonon-cascade-nft-wrap' },
-            canEarnPoint && h('div', { className: 'nonon-point-banner small' }, '+1'),
+            hasIssue && h('div', { className: 'nonon-issue-banner small' }, 'NO OWNER'),
+            canEarnPoint && !hasIssue && h('div', { className: 'nonon-point-banner small' }, '+1'),
             imageUrl
               ? h('img', { className: 'nonon-cascade-nft', src: imageUrl, alt: `Nonon #${tokenId}` })
               : h('div', { className: 'nonon-cascade-nft-placeholder' }, `#${tokenId}`)
           ),
           h('div', { className: 'nonon-cascade-row-info' },
             h('div', { className: 'nonon-cascade-row-address' }, this.truncateAddress(player)),
-            h('div', { className: 'nonon-cascade-row-token' }, `Nonon #${tokenId}`)
+            h('div', { className: 'nonon-cascade-row-token' }, `Nonon #${tokenId}`),
+            hasIssue && h('div', { className: 'nonon-cascade-row-issue' }, 'NFT no longer owned!')
           ),
           h('span', { className: 'nonon-cascade-arrow' }, '→'),
           h('span', { style: { color: 'rgba(255,255,255,0.7)', fontSize: '12px' } }, this.truncateAddress(nextPlayer))
@@ -852,14 +922,23 @@ class NononSlide extends Component {
   }
 
   renderNononPicker() {
-    const { ownedNonons, nononImages, nononPointsInfo, selectedNononForJoin } = this.state;
+    const { ownedNonons, nononImages, nononPointsInfo, selectedNononForJoin, committedNonons } = this.state;
 
     if (ownedNonons.length === 0) {
       return h('p', null, 'Loading your Nonons...');
     }
 
+    // Filter out nonons already committed to a slide
+    const availableNonons = ownedNonons.filter(id => !committedNonons[id]);
+
+    if (availableNonons.length === 0) {
+      return h('div', { className: 'nonon-picker' },
+        h('p', { className: 'nonon-picker-title' }, 'All your Nonons are committed to slides!')
+      );
+    }
+
     // Sort by can earn point (hasn't sent = can earn, show first)
-    const sortedNonons = [...ownedNonons].sort((a, b) => {
+    const sortedNonons = [...availableNonons].sort((a, b) => {
       const aInfo = nononPointsInfo[a];
       const bInfo = nononPointsInfo[b];
       const aCanEarn = aInfo && !aInfo.hasSent ? 1 : 0;

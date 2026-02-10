@@ -378,6 +378,86 @@
   }
 }
 
+/* Committed to Slide Banner */
+.nonon-committed-banner {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  background-color: #E88B8B;
+  color: #fff;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 3px 6px;
+  text-align: center;
+  z-index: 1;
+}
+
+.nonon-owned-item.committed {
+  border-color: #E88B8B;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.nonon-owned-item.committed img {
+  opacity: 0.7;
+}
+
+/* Ownership Warning */
+.nonon-ownership-warning {
+  background-color: rgba(200, 50, 50, 0.3);
+  border: 2px solid #c44;
+  color: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.nonon-ownership-warning p {
+  margin: 0 0 5px 0;
+  font-size: 13px;
+}
+
+.nonon-ownership-warning-detail {
+  font-size: 11px;
+  color: rgba(255,255,255,0.8);
+}
+
+.nonon-issue-banner {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #c44;
+  color: #fff;
+  font-size: 8px;
+  font-weight: bold;
+  padding: 2px 5px;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.nonon-issue-banner.small {
+  top: -6px;
+  right: -6px;
+  font-size: 7px;
+  padding: 2px 4px;
+}
+
+.nonon-cascade-participant.ownership-issue .nonon-cascade-nft {
+  border-color: #c44;
+  opacity: 0.6;
+}
+
+.nonon-cascade-row.ownership-issue {
+  border-color: #c44;
+}
+
+.nonon-cascade-row-issue {
+  font-size: 10px;
+  color: #c44;
+  font-weight: bold;
+}
+
 /* Slide hint text */
 .nonon-slide-hint {
   font-size: 10px;

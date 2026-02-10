@@ -1,4 +1,4 @@
-export const NONON_SLIDE_ADDRESS = '0xeddC891e17471071A7a5F9aa10178C57fAc6F352';
+export const NONON_SLIDE_ADDRESS = '0x3ef469DDE7BE00F67589F0D3ffDD6C71Db7a60FD';
 export const NONON_NFT_ADDRESS = '0xD3607bc8c7927B348bac50dc224C28E3ce933ca6';
 export const FRIEND_CARD_ADDRESS = '0x74ECE89f9fc34643eACf79BfB4165D29CA5d92Cc';
 
@@ -23,6 +23,8 @@ export const NONON_SLIDE_ABI = [
   {"inputs":[{"internalType":"uint256","name":"slideId","type":"uint256"}],"name":"getSlideParticipants","outputs":[{"internalType":"address[]","name":"_players","type":"address[]"},{"internalType":"uint256[]","name":"_tokenIds","type":"uint256[]"}],"stateMutability":"view","type":"function"},
   {"inputs":[{"internalType":"uint256","name":"slideId","type":"uint256"},{"internalType":"address","name":"player","type":"address"}],"name":"getRefundAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[{"internalType":"uint256","name":"slideId","type":"uint256"}],"name":"getCreatorPenalties","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"isTokenCommitted","outputs":[{"internalType":"bool","name":"committed","type":"bool"},{"internalType":"uint256","name":"slideId","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"tokenCommittedToSlide","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   // Write functions
   {"inputs":[{"internalType":"uint256","name":"_minPlayers","type":"uint256"},{"internalType":"uint256","name":"_maxPlayers","type":"uint256"},{"internalType":"bool","name":"_creatorOnlyExecute","type":"bool"}],"name":"createSlide","outputs":[{"internalType":"uint256","name":"slideId","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},
   {"inputs":[{"internalType":"uint256","name":"slideId","type":"uint256"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"joinSlide","outputs":[],"stateMutability":"payable","type":"function"},

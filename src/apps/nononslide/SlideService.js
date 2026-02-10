@@ -179,6 +179,15 @@ class SlideService {
     return await this.nononContract.isApprovedForAll(address, NONON_SLIDE_ADDRESS);
   }
 
+  async getTokenOwner(tokenId) {
+    return await this.nononContract.ownerOf(tokenId);
+  }
+
+  async isTokenCommitted(tokenId) {
+    const [committed, slideId] = await this.slideContract.isTokenCommitted(tokenId);
+    return { committed, slideId: committed ? slideId.toNumber() : null };
+  }
+
   // --- Friend Card Functions ---
 
   async hasSentToken(address, tokenId) {
