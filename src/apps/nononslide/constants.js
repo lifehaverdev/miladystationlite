@@ -69,7 +69,7 @@ export const FRIEND_CARD_ABI = [
 ];
 
 // Gas estimate per player from contract
-export const GAS_ESTIMATE_PER_PLAYER = 150000;
+export const GAS_ESTIMATE_PER_PLAYER = 80000;
 
 // Circle layout threshold - above this use linear list
 export const CIRCLE_LAYOUT_MAX = 8;
