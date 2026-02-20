@@ -275,9 +275,14 @@ class SlideService {
   }
 
   async joinSlide(slideId, tokenId) {
-    const deposit = await this.calculateRequiredDeposit(slideId);
     const signer = await this.getSigner();
     const contract = this.slideContract.connect(signer);
+    // Read slide data through the same provider as the transaction to avoid network mismatch
+    const { ethers } = await import('ethers');
+    const slideData = await contract.slides(slideId);
+    const deposit = slideData.gasPriceStandard.isZero()
+      ? ethers.utils.parseEther('0.001')
+      : slideData.gasPriceStandard.mul(GAS_ESTIMATE_PER_PLAYER).mul(110).div(100);
     const gasEstimate = await contract.estimateGas.joinSlide(slideId, tokenId, { value: deposit });
     const gasLimit = gasEstimate.mul(150).div(100);
     const tx = await contract.joinSlide(slideId, tokenId, { value: deposit, gasLimit });
